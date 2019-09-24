@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mankan.plumad.mapper.AdPromotionPlanMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mankan.plumad.model.AdPromotionPlan">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="plan_name" property="planName" />
+        <result column="plan_code" property="planCode" />
+        <result column="charging_mode" property="chargingMode" />
+        <result column="audit_mode" property="auditMode" />
+        <result column="devices_type" property="devicesType" />
+        <result column="settlement_type" property="settlementType" />
+        <result column="settlement_category" property="settlementCategory" />
+        <result column="channel_param" property="channelParam" />
+        <result column="channel_callback" property="channelCallback" />
+        <result column="channel_cookie_validity" property="channelCookieValidity" />
+        <result column="channel_share_url" property="channelShareUrl" />
+        <result column="commission_rate" property="commissionRate" />
+        <result column="unit_price" property="unitPrice" />
+        <result column="limit_amount" property="limitAmount" />
+        <result column="price_remarks" property="priceRemarks" />
+        <result column="end_type" property="endType" />
+        <result column="end_date" property="endDate" />
+        <result column="logo" property="logo" />
+        <result column="promotion_remarks" property="promotionRemarks" />
+        <result column="promotion_area" property="promotionArea" />
+        <result column="web_type" property="webType" />
+        <result column="period_week" property="periodWeek" />
+        <result column="period_day" property="periodDay" />
+        <result column="status" property="status" />
+        <result column="remarks" property="remarks" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="create_user" property="createUser" />
+    </resultMap>
+
+</mapper>

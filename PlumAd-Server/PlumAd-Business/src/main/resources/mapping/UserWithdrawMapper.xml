@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mankan.plumad.mapper.UserWithdrawMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mankan.plumad.model.UserWithdraw">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="ip_address" property="ipAddress" />
+        <result column="order_num" property="orderNum" />
+        <result column="total_amount" property="totalAmount" />
+        <result column="taxation" property="taxation" />
+        <result column="service_fee" property="serviceFee" />
+        <result column="withdraw_amount" property="withdrawAmount" />
+        <result column="request_time" property="requestTime" />
+        <result column="response_time" property="responseTime" />
+        <result column="notify_time" property="notifyTime" />
+        <result column="status" property="status" />
+        <result column="remarks" property="remarks" />
+    </resultMap>
+
+</mapper>

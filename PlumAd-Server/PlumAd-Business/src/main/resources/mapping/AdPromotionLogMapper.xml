@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mankan.plumad.mapper.AdPromotionLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mankan.plumad.model.AdPromotionLog">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="promotion_position_id" property="promotionPositionId" />
+        <result column="promotion_type" property="promotionType" />
+        <result column="charging_mode" property="chargingMode" />
+        <result column="interface_type" property="interfaceType" />
+        <result column="ip_address" property="ipAddress" />
+        <result column="mac_address" property="macAddress" />
+        <result column="dns_address" property="dnsAddress" />
+        <result column="user_agent" property="userAgent" />
+        <result column="promotion_info_id" property="promotionInfoId" />
+        <result column="status" property="status" />
+        <result column="remarks" property="remarks" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="create_user" property="createUser" />
+    </resultMap>
+
+</mapper>

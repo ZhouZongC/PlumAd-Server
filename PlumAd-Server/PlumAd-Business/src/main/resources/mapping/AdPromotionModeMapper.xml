@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mankan.plumad.mapper.AdPromotionModeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mankan.plumad.model.AdPromotionMode">
+        <result column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="promotion_code" property="promotionCode" />
+        <result column="promotion_name" property="promotionName" />
+        <result column="promotion_type" property="promotionType" />
+        <result column="web_url" property="webUrl" />
+        <result column="web_name" property="webName" />
+        <result column="web_icp" property="webIcp" />
+        <result column="web_type" property="webType" />
+        <result column="daily_visits" property="dailyVisits" />
+        <result column="web_remarks" property="webRemarks" />
+        <result column="app_name" property="appName" />
+        <result column="app_index" property="appIndex" />
+        <result column="app_down_url" property="appDownUrl" />
+        <result column="app_type" property="appType" />
+        <result column="activity_visits" property="activityVisits" />
+        <result column="app_remarks" property="appRemarks" />
+        <result column="group_number" property="groupNumber" />
+        <result column="group_name" property="groupName" />
+        <result column="group_num" property="groupNum" />
+        <result column="group_type" property="groupType" />
+        <result column="dav_source" property="davSource" />
+        <result column="dav_other_source" property="davOtherSource" />
+        <result column="dav_account" property="davAccount" />
+        <result column="dav_follow" property="davFollow" />
+        <result column="dav_type" property="davType" />
+        <result column="status" property="status" />
+        <result column="remarks" property="remarks" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="create_user" property="createUser" />
+    </resultMap>
+
+</mapper>

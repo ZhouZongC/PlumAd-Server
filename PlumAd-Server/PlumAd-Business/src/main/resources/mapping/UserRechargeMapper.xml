@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mankan.plumad.mapper.UserRechargeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mankan.plumad.model.UserRecharge">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="ip_address" property="ipAddress" />
+        <result column="order_num" property="orderNum" />
+        <result column="recharge_amount" property="rechargeAmount" />
+        <result column="pay_type" property="payType" />
+        <result column="request_time" property="requestTime" />
+        <result column="response_time" property="responseTime" />
+        <result column="notify_time" property="notifyTime" />
+        <result column="status" property="status" />
+        <result column="remarks" property="remarks" />
+    </resultMap>
+
+</mapper>

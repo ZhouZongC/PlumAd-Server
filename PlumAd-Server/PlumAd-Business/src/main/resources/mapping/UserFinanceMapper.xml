@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mankan.plumad.mapper.UserFinanceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mankan.plumad.model.UserFinance">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="recharge_amount" property="rechargeAmount" />
+        <result column="withdraw_amount" property="withdrawAmount" />
+        <result column="total_recharge_amount" property="totalRechargeAmount" />
+        <result column="total_withdraw_amount" property="totalWithdrawAmount" />
+        <result column="handle_amount" property="handleAmount" />
+        <result column="frozen_amount" property="frozenAmount" />
+        <result column="bank_code" property="bankCode" />
+        <result column="bank_info" property="bankInfo" />
+        <result column="cardnum" property="cardnum" />
+        <result column="card_name" property="cardName" />
+        <result column="version" property="version" />
+        <result column="status" property="status" />
+        <result column="remarks" property="remarks" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="create_user" property="createUser" />
+    </resultMap>
+
+</mapper>

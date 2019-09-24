@@ -27,9 +27,9 @@ spring:
       test-on-return: false
     driverClassName: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://111.231.145.20:3306/plum_ad?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
+    url: jdbc:mysql://47.97.198.227:3306/plum_ad?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
     username: root
-    password: Kb12345!
+    password: Nbkb5475997!@
   boot:
     admin:
       url: http://localhost:20001
