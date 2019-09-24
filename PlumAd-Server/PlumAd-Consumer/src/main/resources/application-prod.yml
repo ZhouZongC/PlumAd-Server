@@ -1,0 +1,44 @@
+# Spring boot application
+spring:
+  application:
+    name: PlumAd-Consumer
+  boot:
+    admin:
+      url: http://localhost:20001
+  redis:
+    password:
+    database: 0
+    port: 6379
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+    host: localhost
+    timeout: 0
+server:
+  port: 29076
+endpoints:
+  dubbo:
+    enabled: true
+
+management:
+  security:
+    enabled: false
+  port: 29077
+  health:
+    dubbo:
+      status:
+        defaults: memory
+
+# Dubbo
+dubbo:
+  registry:
+    protocol: zookeeper
+    address: localhost:2181
+    id: MiPay-registry
+  application:
+    name: PlumAd-Consumer
+    id: PlumAd-Consumer
+  scan:
+    basePackages: com.plumad.**.consumer

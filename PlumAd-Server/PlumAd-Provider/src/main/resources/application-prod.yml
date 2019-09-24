@@ -1,0 +1,111 @@
+# Spring boot application
+spring:
+  application:
+    name: PlumAd-Provider
+  datasource:
+    druid:
+      min-idle: 5
+      max-pool-prepared-statement-per-connection-size: 20
+      web-stat-filter:
+        url-pattern: /druid/*
+        exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
+        enabled: true
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      max-active: 20
+      validation-query: select 1
+      filters: stat,wall,log4j
+      max-wait: 60000
+      test-on-borrow: false
+      stat-view-servlet:
+        url-pattern: /druid/*
+        reset-enable: false
+        enabled: true
+      pool-prepared-statements: true
+      min-evictable-idle-time-millis: 300000
+      initial-size: 5
+      test-on-return: false
+    driverClassName: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://111.231.145.20:3306/plum_ad?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
+    username: root
+    password: Kb12345!
+  boot:
+    admin:
+      url: http://localhost:20001
+  redis:
+    password:
+    database: 0
+    port: 6379
+    host: localhost
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: -1
+    timeout: 0
+server:
+  port: 29176
+endpoints:
+  dubbo:
+    enabled: true
+
+management:
+  security:
+    enabled: false
+    port: 29178
+  health:
+    dubbo:
+      status:
+        defaults: memory
+        extras: load,threadpool
+
+# mybstis
+mybatis:
+  mapper-locations: classpath:/mapping/**/*.xml
+  type-aliases-package: com.mankan.plumad.model.**
+mapper:
+  identity: MYSQL
+  not-empty: false
+  mappers: com.mankan.plumad.mapper
+
+# pagehelper
+pagehelper:
+  supportMethodsArguments: true
+  reasonable: true
+  helperDialect: mysql
+  params: count=countSql
+
+
+# mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapping/**/*.xml
+  typeAliasesPackage: com.mankan.plumad.model.**
+  global-config:
+    id-type: 3  #0:数据库ID自增   1:用户输入id  2:全局唯一id(IdWorker)  3:全局唯一ID(uuid)
+    db-column-underline: false
+    refresh-mapper: true
+    #逻辑删除配置
+    logic-delete-value: 0
+    logic-not-delete-value: 1
+    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+  configuration:
+    map-underscore-to-camel-case: false
+    cache-enabled: true #配置的缓存的全局开关
+    lazyLoadingEnabled: true #延时加载的开关
+    multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
+
+# Dubbo
+dubbo:
+  registry:
+    protocol: zookeeper
+    address: localhost:2181
+    id: MiPay-registry
+  application:
+    name: PlumAd-Provider
+    id: PlumAd-Provider
+  scan:
+    basePackages: com.mankan.**.provider.**
+
+
