@@ -42,3 +42,8 @@ dubbo:
     id: PlumAd-Consumer
   scan:
     basePackages: com.plumad.**.consumer
+
+plumad:
+  fileUpload:
+    path: C://file
+    url: http://localhost/
