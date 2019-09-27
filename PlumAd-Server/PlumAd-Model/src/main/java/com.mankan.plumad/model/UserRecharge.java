@@ -1,5 +1,6 @@
 package com.mankan.plumad.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
@@ -42,11 +43,11 @@ public class UserRecharge extends Model<UserRecharge> {
     @TableField("order_num")
     private String orderNum;
     /**
-     * 充值类型
+     * 充值金额
      */
-    @ApiModelProperty(value = "充值类型",name="rechargeAmount")
+    @ApiModelProperty(value = "充值金额",name="rechargeAmount")
     @TableField("recharge_amount")
-    private String rechargeAmount;
+    private BigDecimal rechargeAmount;
     /**
      * 支付类型
      */
@@ -115,11 +116,11 @@ public class UserRecharge extends Model<UserRecharge> {
         this.orderNum = orderNum;
     }
 
-    public String getRechargeAmount() {
+    public BigDecimal getRechargeAmount() {
         return rechargeAmount;
     }
 
-    public void setRechargeAmount(String rechargeAmount) {
+    public void setRechargeAmount(BigDecimal rechargeAmount) {
         this.rechargeAmount = rechargeAmount;
     }
 

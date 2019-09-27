@@ -95,7 +95,7 @@ public class UserFinance extends Model<UserFinance> {
      */
     @ApiModelProperty(value = "乐观锁",name="version")
     @Version
-    private String version;
+    private Integer version;
     /**
      * 状态
      */
@@ -229,11 +229,11 @@ public class UserFinance extends Model<UserFinance> {
         this.cardName = cardName;
     }
 
-    public String getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(Integer version) {
         this.version = version;
     }
 

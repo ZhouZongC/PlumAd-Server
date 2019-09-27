@@ -29,7 +29,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeMapper, Use
             ew.eq(!StringUtils.isEmpty(entity.getUserId()),"user_id",entity.getUserId());
             ew.eq(!StringUtils.isEmpty(entity.getIpAddress()),"ip_address",entity.getIpAddress());
             ew.eq(!StringUtils.isEmpty(entity.getOrderNum()),"order_num",entity.getOrderNum());
-            ew.eq(!StringUtils.isEmpty(entity.getRechargeAmount()),"recharge_amount",entity.getRechargeAmount());
+            ew.eq(entity.getRechargeAmount()!=null,"recharge_amount",entity.getRechargeAmount());
             ew.eq(!StringUtils.isEmpty(entity.getPayType()),"pay_type",entity.getPayType());
             ew.eq(entity.getRequestTime()!=null,"request_time",entity.getRequestTime());
             ew.eq(entity.getResponseTime()!=null,"response_time",entity.getResponseTime());
@@ -46,7 +46,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeMapper, Use
             ew.eq(!StringUtils.isEmpty(entity.getUserId()),"user_id",entity.getUserId());
             ew.eq(!StringUtils.isEmpty(entity.getIpAddress()),"ip_address",entity.getIpAddress());
             ew.eq(!StringUtils.isEmpty(entity.getOrderNum()),"order_num",entity.getOrderNum());
-            ew.eq(!StringUtils.isEmpty(entity.getRechargeAmount()),"recharge_amount",entity.getRechargeAmount());
+            ew.eq(entity.getRechargeAmount()!=null,"recharge_amount",entity.getRechargeAmount());
             ew.eq(!StringUtils.isEmpty(entity.getPayType()),"pay_type",entity.getPayType());
             ew.eq(entity.getRequestTime()!=null,"request_time",entity.getRequestTime());
             ew.eq(entity.getResponseTime()!=null,"response_time",entity.getResponseTime());
@@ -65,7 +65,7 @@ public class UserRechargeServiceImpl extends ServiceImpl<UserRechargeMapper, Use
                 ew.eq(!StringUtils.isEmpty(entity.getUserId()),"user_id",entity.getUserId());
                 ew.eq(!StringUtils.isEmpty(entity.getIpAddress()),"ip_address",entity.getIpAddress());
                 ew.eq(!StringUtils.isEmpty(entity.getOrderNum()),"order_num",entity.getOrderNum());
-                ew.eq(!StringUtils.isEmpty(entity.getRechargeAmount()),"recharge_amount",entity.getRechargeAmount());
+                ew.eq(entity.getRechargeAmount()!=null,"recharge_amount",entity.getRechargeAmount());
                 ew.eq(!StringUtils.isEmpty(entity.getPayType()),"pay_type",entity.getPayType());
                 ew.eq(entity.getRequestTime()!=null,"request_time",entity.getRequestTime());
                 ew.eq(entity.getResponseTime()!=null,"response_time",entity.getResponseTime());

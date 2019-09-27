@@ -37,7 +37,7 @@ public class UserFinanceServiceImpl extends ServiceImpl<UserFinanceMapper, UserF
             ew.eq(!StringUtils.isEmpty(entity.getBankInfo()),"bank_info",entity.getBankInfo());
             ew.eq(!StringUtils.isEmpty(entity.getCardnum()),"cardnum",entity.getCardnum());
             ew.eq(!StringUtils.isEmpty(entity.getCardName()),"card_name",entity.getCardName());
-            ew.eq(!StringUtils.isEmpty(entity.getVersion()),"version",entity.getVersion());
+            ew.eq(entity.getVersion()!=null,"version",entity.getVersion());
             ew.eq(!StringUtils.isEmpty(entity.getStatus()),"status",entity.getStatus());
             ew.eq(!StringUtils.isEmpty(entity.getRemarks()),"remarks",entity.getRemarks());
             ew.eq(!StringUtils.isEmpty(entity.getDeleteFlag()),"delete_flag",entity.getDeleteFlag());
@@ -62,7 +62,7 @@ public class UserFinanceServiceImpl extends ServiceImpl<UserFinanceMapper, UserF
             ew.eq(!StringUtils.isEmpty(entity.getBankInfo()),"bank_info",entity.getBankInfo());
             ew.eq(!StringUtils.isEmpty(entity.getCardnum()),"cardnum",entity.getCardnum());
             ew.eq(!StringUtils.isEmpty(entity.getCardName()),"card_name",entity.getCardName());
-            ew.eq(!StringUtils.isEmpty(entity.getVersion()),"version",entity.getVersion());
+            ew.eq(entity.getVersion()!=null,"version",entity.getVersion());
             ew.eq(!StringUtils.isEmpty(entity.getStatus()),"status",entity.getStatus());
             ew.eq(!StringUtils.isEmpty(entity.getRemarks()),"remarks",entity.getRemarks());
             ew.eq(!StringUtils.isEmpty(entity.getDeleteFlag()),"delete_flag",entity.getDeleteFlag());
@@ -89,7 +89,7 @@ public class UserFinanceServiceImpl extends ServiceImpl<UserFinanceMapper, UserF
                 ew.eq(!StringUtils.isEmpty(entity.getBankInfo()),"bank_info",entity.getBankInfo());
                 ew.eq(!StringUtils.isEmpty(entity.getCardnum()),"cardnum",entity.getCardnum());
                 ew.eq(!StringUtils.isEmpty(entity.getCardName()),"card_name",entity.getCardName());
-                ew.eq(!StringUtils.isEmpty(entity.getVersion()),"version",entity.getVersion());
+                ew.eq(entity.getVersion()!=null,"version",entity.getVersion());
                 ew.eq(!StringUtils.isEmpty(entity.getStatus()),"status",entity.getStatus());
                 ew.eq(!StringUtils.isEmpty(entity.getRemarks()),"remarks",entity.getRemarks());
                 ew.eq(!StringUtils.isEmpty(entity.getDeleteFlag()),"delete_flag",entity.getDeleteFlag());
