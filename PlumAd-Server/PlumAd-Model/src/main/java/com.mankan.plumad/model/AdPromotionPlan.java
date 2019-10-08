@@ -163,13 +163,13 @@ pc/wap/ios/android
      */
     @ApiModelProperty(value = "周期日程-日期",name="periodWeek")
     @TableField("period_week")
-    private Date periodWeek;
+    private String periodWeek;
     /**
      * 周期日程-小时
      */
     @ApiModelProperty(value = "周期日程-小时",name="periodDay")
     @TableField("period_day")
-    private Date periodDay;
+    private String periodDay;
     /**
      * 状态
      */
@@ -391,19 +391,19 @@ pc/wap/ios/android
         this.webType = webType;
     }
 
-    public Date getPeriodWeek() {
+    public String getPeriodWeek() {
         return periodWeek;
     }
 
-    public void setPeriodWeek(Date periodWeek) {
+    public void setPeriodWeek(String periodWeek) {
         this.periodWeek = periodWeek;
     }
 
-    public Date getPeriodDay() {
+    public String getPeriodDay() {
         return periodDay;
     }
 
-    public void setPeriodDay(Date periodDay) {
+    public void setPeriodDay(String periodDay) {
         this.periodDay = periodDay;
     }
 

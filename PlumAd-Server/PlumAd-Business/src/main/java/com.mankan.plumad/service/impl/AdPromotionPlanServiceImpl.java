@@ -48,8 +48,8 @@ public class AdPromotionPlanServiceImpl extends ServiceImpl<AdPromotionPlanMappe
             ew.eq(!StringUtils.isEmpty(entity.getPromotionRemarks()),"promotion_remarks",entity.getPromotionRemarks());
             ew.eq(!StringUtils.isEmpty(entity.getPromotionArea()),"promotion_area",entity.getPromotionArea());
             ew.eq(!StringUtils.isEmpty(entity.getWebType()),"web_type",entity.getWebType());
-            ew.eq(entity.getPeriodWeek()!=null,"period_week",entity.getPeriodWeek());
-            ew.eq(entity.getPeriodDay()!=null,"period_day",entity.getPeriodDay());
+            ew.eq(!StringUtils.isEmpty(entity.getPeriodWeek()),"period_week",entity.getPeriodWeek());
+            ew.eq(!StringUtils.isEmpty(entity.getPeriodDay()),"period_day",entity.getPeriodDay());
             ew.eq(!StringUtils.isEmpty(entity.getStatus()),"status",entity.getStatus());
             ew.eq(!StringUtils.isEmpty(entity.getRemarks()),"remarks",entity.getRemarks());
             ew.eq(!StringUtils.isEmpty(entity.getDeleteFlag()),"delete_flag",entity.getDeleteFlag());
@@ -85,8 +85,8 @@ public class AdPromotionPlanServiceImpl extends ServiceImpl<AdPromotionPlanMappe
             ew.eq(!StringUtils.isEmpty(entity.getPromotionRemarks()),"promotion_remarks",entity.getPromotionRemarks());
             ew.eq(!StringUtils.isEmpty(entity.getPromotionArea()),"promotion_area",entity.getPromotionArea());
             ew.eq(!StringUtils.isEmpty(entity.getWebType()),"web_type",entity.getWebType());
-            ew.eq(entity.getPeriodWeek()!=null,"period_week",entity.getPeriodWeek());
-            ew.eq(entity.getPeriodDay()!=null,"period_day",entity.getPeriodDay());
+            ew.eq(!StringUtils.isEmpty(entity.getPeriodWeek()),"period_week",entity.getPeriodWeek());
+            ew.eq(!StringUtils.isEmpty(entity.getPeriodDay()),"period_day",entity.getPeriodDay());
             ew.eq(!StringUtils.isEmpty(entity.getStatus()),"status",entity.getStatus());
             ew.eq(!StringUtils.isEmpty(entity.getRemarks()),"remarks",entity.getRemarks());
             ew.eq(!StringUtils.isEmpty(entity.getDeleteFlag()),"delete_flag",entity.getDeleteFlag());
@@ -124,8 +124,8 @@ public class AdPromotionPlanServiceImpl extends ServiceImpl<AdPromotionPlanMappe
                 ew.eq(!StringUtils.isEmpty(entity.getPromotionRemarks()),"promotion_remarks",entity.getPromotionRemarks());
                 ew.eq(!StringUtils.isEmpty(entity.getPromotionArea()),"promotion_area",entity.getPromotionArea());
                 ew.eq(!StringUtils.isEmpty(entity.getWebType()),"web_type",entity.getWebType());
-                ew.eq(entity.getPeriodWeek()!=null,"period_week",entity.getPeriodWeek());
-                ew.eq(entity.getPeriodDay()!=null,"period_day",entity.getPeriodDay());
+                ew.eq(!StringUtils.isEmpty(entity.getPeriodWeek()),"period_week",entity.getPeriodWeek());
+                ew.eq(!StringUtils.isEmpty(entity.getPeriodDay()),"period_day",entity.getPeriodDay());
                 ew.eq(!StringUtils.isEmpty(entity.getStatus()),"status",entity.getStatus());
                 ew.eq(!StringUtils.isEmpty(entity.getRemarks()),"remarks",entity.getRemarks());
                 ew.eq(!StringUtils.isEmpty(entity.getDeleteFlag()),"delete_flag",entity.getDeleteFlag());
