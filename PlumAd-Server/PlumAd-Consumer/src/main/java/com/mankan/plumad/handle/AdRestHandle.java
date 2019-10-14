@@ -90,7 +90,7 @@ public class AdRestHandle {
             AdPromotionPositionAdQuery adPromotionPositionAdQuery = new AdPromotionPositionAdQuery();
             adPromotionPositionAdQuery.setPageNum(1);
             adPromotionPositionAdQuery.setPageSize(10);
-            adPromotionPositionAdQuery.setPromotionPositionId(adPromotionDTO.getPositionCode());
+            adPromotionPositionAdQuery.setPositionCode(adPromotionDTO.getPositionCode());
             List<AdPromotionPositionAd> adPromotionPositionAds =
                     adPromotionPositionAdConsumer.listAdPromotionPositionAd(adPromotionPositionAdQuery)
                     .getList();
@@ -108,7 +108,7 @@ public class AdRestHandle {
             String macAddress = NetworkUtil.getMacAddress(ip);
             String dnsAddress = NetworkUtil.getHostName(ip);
             adPromotionLog.setUserId(adPromotionDTO.getUserId());
-            adPromotionLog.setPromotionPositionId(adPromotionDTO.getPositionCode());
+            adPromotionLog.setPositionCode(adPromotionDTO.getPositionCode());
             adPromotionLog.setPromotionType(adPromotionDTO.getPromotionType());
             adPromotionLog.setChargingMode(adPromotionDTO.getChargingMode());
             adPromotionLog.setInterfaceType("1");
@@ -172,7 +172,7 @@ public class AdRestHandle {
                 String macAddress = NetworkUtil.getMacAddress(ip);
                 String dnsAddress = NetworkUtil.getHostName(ip);
                 adPromotionLog.setUserId(adPromotionDTO.getUserId());
-                adPromotionLog.setPromotionPositionId(adPromotionDTO.getPositionCode());
+                adPromotionLog.setPositionCode(adPromotionDTO.getPositionCode());
                 adPromotionLog.setPromotionType(adPromotionDTO.getPromotionType());
                 adPromotionLog.setChargingMode(adPromotionDTO.getChargingMode());
                 adPromotionLog.setInterfaceType("1");
@@ -227,7 +227,7 @@ public class AdRestHandle {
             String macAddress = NetworkUtil.getMacAddress(ip);
             String dnsAddress = NetworkUtil.getHostName(ip);
             adPromotionLog.setUserId(adShowDTO.getAdPromotionDTO().getUserId());
-            adPromotionLog.setPromotionPositionId(adShowDTO.getAdPromotionDTO().getPositionCode());
+            adPromotionLog.setPositionCode(adShowDTO.getAdPromotionDTO().getPositionCode());
             adPromotionLog.setPromotionType(adShowDTO.getAdPromotionDTO().getPromotionType());
             adPromotionLog.setChargingMode(adShowDTO.getAdPromotionDTO().getChargingMode());
             adPromotionLog.setInterfaceType("2");
