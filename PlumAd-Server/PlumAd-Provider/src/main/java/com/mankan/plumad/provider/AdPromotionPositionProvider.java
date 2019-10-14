@@ -1,6 +1,7 @@
 package com.mankan.plumad.provider;
 
 import com.github.pagehelper.PageInfo;
+import com.mankan.plumad.dto.AdPromotionDTO;
 import com.mankan.plumad.dubbo.AdPromotionPositionApi;
 import com.mankan.plumad.model.AdPromotionPosition;
 import com.mankan.plumad.service.IAdPromotionPositionService;
@@ -63,6 +64,11 @@ public class AdPromotionPositionProvider implements AdPromotionPositionApi {
     @Override
     public Boolean deleteAdPromotionPosition(List<String> idlist){
         return service.deleteBatchIds(idlist);
+    }
+
+    @Override
+    public AdPromotionDTO getAdPromotionDTO(String positionCode) {
+        return service.getAdPromotionDTO(positionCode);
     }
 
 }

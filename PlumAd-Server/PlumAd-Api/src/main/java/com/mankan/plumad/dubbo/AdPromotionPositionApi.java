@@ -2,6 +2,7 @@ package com.mankan.plumad.dubbo;
 
 
 import com.github.pagehelper.PageInfo;
+import com.mankan.plumad.dto.AdPromotionDTO;
 import com.mankan.plumad.model.AdPromotionPosition;
 
 import java.util.List;
@@ -65,4 +66,9 @@ public interface AdPromotionPositionApi {
      */
     Boolean deleteAdPromotionPosition(List<String> idlist);
 
+    /**
+     * @param positionCode
+     * @return
+     */
+    AdPromotionDTO getAdPromotionDTO(String positionCode);
 }

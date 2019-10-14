@@ -1,5 +1,6 @@
 package com.mankan.plumad.mapper;
 
+import com.mankan.plumad.dto.AdPromotionDTO;
 import com.mankan.plumad.model.AdPromotionPosition;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,4 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AdPromotionPositionMapper extends BaseMapper<AdPromotionPosition> {
 
+    AdPromotionDTO getAdPromotionDTO(String positionCode);
 }

@@ -1,6 +1,7 @@
 package com.mankan.plumad.dubbo;
 
 import com.github.pagehelper.PageInfo;
+import com.mankan.plumad.dto.AdPromotionDTO;
 import com.mankan.plumad.model.AdPromotionPosition;
 
 import java.util.List;
@@ -43,6 +44,11 @@ public class AdPromotionPositionApiMock implements AdPromotionPositionApi {
 
     @Override
     public Boolean deleteAdPromotionPosition(List<String> idlist){
+        return null;
+    }
+
+    @Override
+    public AdPromotionDTO getAdPromotionDTO(String positionCode) {
         return null;
     }
 

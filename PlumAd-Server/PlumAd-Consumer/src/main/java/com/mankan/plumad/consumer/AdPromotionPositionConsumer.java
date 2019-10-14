@@ -4,6 +4,7 @@ package com.mankan.plumad.consumer;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.github.pagehelper.PageInfo;
+import com.mankan.plumad.dto.AdPromotionDTO;
 import com.mankan.plumad.dubbo.AdPromotionPositionApi;
 import org.springframework.stereotype.Component;
 import com.mankan.plumad.model.AdPromotionPosition;
@@ -90,5 +91,18 @@ public class AdPromotionPositionConsumer {
     public Boolean deleteAdPromotionPosition(List<String> idlist){
         return dubboApi.deleteAdPromotionPosition(idlist);
     }
+
+    //////////////////////////////////ad/////////////////////////////
+
+    /**
+     * 获取推荐广告位相关信息
+     * @param positionCode
+     * @return
+     */
+    public  AdPromotionDTO getAdPromotionDTO(String positionCode) {
+        return dubboApi.getAdPromotionDTO(positionCode);
+    }
+
+
 
 }

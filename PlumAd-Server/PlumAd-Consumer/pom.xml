@@ -30,6 +30,11 @@
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>net.ipip</groupId>
+            <artifactId>ipdb</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <!--指定使用maven打包-->

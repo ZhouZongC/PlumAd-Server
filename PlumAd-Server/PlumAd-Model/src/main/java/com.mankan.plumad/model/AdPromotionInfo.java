@@ -67,6 +67,11 @@ public class AdPromotionInfo extends Model<AdPromotionInfo> {
     @TableField("ad_url")
     private String adUrl;
     /**
+     * 广告地址
+     */
+    @ApiModelProperty(value = "权重",name="weight")
+    private int weight;
+    /**
      * 状态
      */
     @ApiModelProperty(value = "状态",name="status")
@@ -175,6 +180,14 @@ public class AdPromotionInfo extends Model<AdPromotionInfo> {
         this.status = status;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
     public String getRemarks() {
         return remarks;
     }
@@ -231,6 +244,7 @@ public class AdPromotionInfo extends Model<AdPromotionInfo> {
                 ", picType='" + picType + '\'' +
                 ", picUrl='" + picUrl + '\'' +
                 ", adUrl='" + adUrl + '\'' +
+                ", weight='" + weight + '\'' +
                 ", status='" + status + '\'' +
                 ", remarks='" + remarks + '\'' +
                 ", deleteFlag='" + deleteFlag + '\'' +

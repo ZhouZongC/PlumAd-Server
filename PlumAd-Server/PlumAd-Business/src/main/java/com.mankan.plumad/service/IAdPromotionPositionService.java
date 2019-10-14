@@ -1,6 +1,8 @@
 package com.mankan.plumad.service;
 
 import java.util.List;
+
+import com.mankan.plumad.dto.AdPromotionDTO;
 import com.mankan.plumad.model.AdPromotionPosition;
 import com.baomidou.mybatisplus.service.IService;
 import java.util.List;
@@ -38,4 +40,6 @@ public interface IAdPromotionPositionService extends IService<AdPromotionPositio
          * @return
          */
         AdPromotionPosition getAdPromotionPositionByCondition(AdPromotionPosition entity);
+
+    AdPromotionDTO getAdPromotionDTO(String positionCode);
 }

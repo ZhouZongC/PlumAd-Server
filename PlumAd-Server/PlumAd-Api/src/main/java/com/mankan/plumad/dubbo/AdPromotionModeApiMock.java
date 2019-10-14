@@ -1,6 +1,8 @@
 package com.mankan.plumad.dubbo;
 
 import com.github.pagehelper.PageInfo;
+import com.mankan.plumad.dto.AdPromotionQuery;
+import com.mankan.plumad.model.AdPromotionInfo;
 import com.mankan.plumad.model.AdPromotionMode;
 
 import java.util.List;
@@ -43,6 +45,11 @@ public class AdPromotionModeApiMock implements AdPromotionModeApi {
 
     @Override
     public Boolean deleteAdPromotionMode(List<String> idlist){
+        return null;
+    }
+
+    @Override
+    public List<AdPromotionInfo> listAd(AdPromotionQuery adPromotionQuery) {
         return null;
     }
 

@@ -1,5 +1,6 @@
 package com.mankan.plumad.service.impl;
 
+import com.mankan.plumad.dto.AdPromotionDTO;
 import com.mankan.plumad.model.AdPromotionPosition;
 import com.mankan.plumad.mapper.AdPromotionPositionMapper;
 import com.mankan.plumad.service.IAdPromotionPositionService;
@@ -92,4 +93,9 @@ public class AdPromotionPositionServiceImpl extends ServiceImpl<AdPromotionPosit
                 ew.eq(!StringUtils.isEmpty(entity.getCreateUser()),"create_user",entity.getCreateUser());
              return this.selectOne(ew);
         }
+
+    @Override
+    public AdPromotionDTO getAdPromotionDTO(String positionCode) {
+        return this.baseMapper.getAdPromotionDTO(positionCode);
+    }
 }

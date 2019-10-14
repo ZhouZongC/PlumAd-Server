@@ -22,5 +22,22 @@
         <result column="modify_time" property="modifyTime" />
         <result column="create_user" property="createUser" />
     </resultMap>
+    <select id="getAdPromotionDTO" resultType="com.mankan.plumad.dto.AdPromotionDTO">
+        SELECT
+            b.user_id as userId,
+            a.promotion_code as promotionCode,
+            a.promotion_type as promotionType,
+            a.position_code as positionCode,
+            a.charging_mode as chargingMode,
+            case when b.promotion_type = 1 then b.web_type
+            when b.promotion_type = 2 then b.app_type end type,
+            a.ad_sizes as adSizes,
+            a.ad_type as adType,
+            a.ad_filter as adFilter
+        FROM
+            ad_promotion_position a
+            LEFT JOIN ad_promotion_mode b ON a.promotion_code = b.promotion_code
+            where position_code = #{positionCode}
+    </select>
 
 </mapper>

@@ -4,7 +4,9 @@ package com.mankan.plumad.consumer;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.github.pagehelper.PageInfo;
+import com.mankan.plumad.dto.AdPromotionQuery;
 import com.mankan.plumad.dubbo.AdPromotionModeApi;
+import com.mankan.plumad.model.AdPromotionInfo;
 import org.springframework.stereotype.Component;
 import com.mankan.plumad.model.AdPromotionMode;
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -91,4 +93,12 @@ public class AdPromotionModeConsumer {
         return dubboApi.deleteAdPromotionMode(idlist);
     }
 
+    /**
+     * 获取推荐广告
+     * @param adPromotionQuery
+     * @return
+     */
+    public List<AdPromotionInfo> listAd(AdPromotionQuery adPromotionQuery,int pageNum,int pageSize) {
+        return dubboApi.listAd(adPromotionQuery);
+    }
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author: youtiao
  * @create: 2019-10-10 10:22
@@ -32,7 +34,7 @@ public class AdRestConrtoller {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "positionCode", value = "位置code", required = true, dataType = "String", paramType = "query")
     })
-    public String listAd(@RequestParam("positionCode") String promotionCode){
+    public String listAd(@RequestParam("positionCode") String promotionCode) throws Throwable {
         return adRestHandle.listAd(promotionCode);
     }
 
@@ -44,8 +46,8 @@ public class AdRestConrtoller {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "positionCode", value = "位置code", required = true, dataType = "String", paramType = "query")
     })
-    public String getAd(@RequestParam("positionCode") String promotionCode){
-        return adRestHandle.getAd(promotionCode);
+    public String getAd(@RequestParam("positionCode") String promotionCode, HttpServletRequest request) throws Throwable {
+        return adRestHandle.getAd(promotionCode,request);
     }
 
 
@@ -56,8 +58,8 @@ public class AdRestConrtoller {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "shorturl", value = "短链接Url", required = true, dataType = "String", paramType = "path")
     })
-    public ModelAndView translateAd(@PathVariable String shorturl){
-        String returnUrl = adRestHandle.translateAd(shorturl);
+    public ModelAndView translateAd(@PathVariable String shorturl, HttpServletRequest request){
+        String returnUrl = adRestHandle.translateAd(shorturl,request);
         return new ModelAndView(new RedirectView(returnUrl));
     }
 

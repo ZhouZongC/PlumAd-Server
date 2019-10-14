@@ -1,7 +1,9 @@
 package com.mankan.plumad.provider;
 
 import com.github.pagehelper.PageInfo;
+import com.mankan.plumad.dto.AdPromotionQuery;
 import com.mankan.plumad.dubbo.AdPromotionModeApi;
+import com.mankan.plumad.model.AdPromotionInfo;
 import com.mankan.plumad.model.AdPromotionMode;
 import com.mankan.plumad.service.IAdPromotionModeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +65,11 @@ public class AdPromotionModeProvider implements AdPromotionModeApi {
     @Override
     public Boolean deleteAdPromotionMode(List<String> idlist){
         return service.deleteBatchIds(idlist);
+    }
+
+    @Override
+    public List<AdPromotionInfo> listAd(AdPromotionQuery adPromotionQuery) {
+        return null;
     }
 
 }
