@@ -23,7 +23,7 @@ public class AdRestConrtoller {
 
     /**
      * 获取建议广告列表
-     * @param adQuery
+     * @param promotionCode
      * @return
      */
     @ResponseBody
