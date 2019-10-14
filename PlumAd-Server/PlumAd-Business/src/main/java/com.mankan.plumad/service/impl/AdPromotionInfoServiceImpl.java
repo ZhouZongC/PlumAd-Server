@@ -29,8 +29,7 @@ public class AdPromotionInfoServiceImpl extends ServiceImpl<AdPromotionInfoMappe
             ew.eq(!StringUtils.isEmpty(entity.getUserId()),"user_id",entity.getUserId());
             ew.eq(!StringUtils.isEmpty(entity.getPlanCode()),"plan_code",entity.getPlanCode());
             ew.eq(!StringUtils.isEmpty(entity.getAdType()),"ad_type",entity.getAdType());
-            ew.eq(entity.getSizesHigh()!=null,"sizes_high",entity.getSizesHigh());
-            ew.eq(entity.getSizesWide()!=null,"sizes_wide",entity.getSizesWide());
+            ew.eq(!StringUtils.isEmpty(entity.getAdSizes()),"ad_sizes",entity.getAdSizes());
             ew.eq(!StringUtils.isEmpty(entity.getPicType()),"pic_type",entity.getPicType());
             ew.eq(!StringUtils.isEmpty(entity.getPicUrl()),"pic_url",entity.getPicUrl());
             ew.eq(!StringUtils.isEmpty(entity.getAdUrl()),"ad_url",entity.getAdUrl());
@@ -50,8 +49,7 @@ public class AdPromotionInfoServiceImpl extends ServiceImpl<AdPromotionInfoMappe
             ew.eq(!StringUtils.isEmpty(entity.getUserId()),"user_id",entity.getUserId());
             ew.eq(!StringUtils.isEmpty(entity.getPlanCode()),"plan_code",entity.getPlanCode());
             ew.eq(!StringUtils.isEmpty(entity.getAdType()),"ad_type",entity.getAdType());
-            ew.eq(entity.getSizesHigh()!=null,"sizes_high",entity.getSizesHigh());
-            ew.eq(entity.getSizesWide()!=null,"sizes_wide",entity.getSizesWide());
+            ew.eq(!StringUtils.isEmpty(entity.getAdSizes()),"ad_sizes",entity.getAdSizes());
             ew.eq(!StringUtils.isEmpty(entity.getPicType()),"pic_type",entity.getPicType());
             ew.eq(!StringUtils.isEmpty(entity.getPicUrl()),"pic_url",entity.getPicUrl());
             ew.eq(!StringUtils.isEmpty(entity.getAdUrl()),"ad_url",entity.getAdUrl());
@@ -73,8 +71,7 @@ public class AdPromotionInfoServiceImpl extends ServiceImpl<AdPromotionInfoMappe
                 ew.eq(!StringUtils.isEmpty(entity.getUserId()),"user_id",entity.getUserId());
                 ew.eq(!StringUtils.isEmpty(entity.getPlanCode()),"plan_code",entity.getPlanCode());
                 ew.eq(!StringUtils.isEmpty(entity.getAdType()),"ad_type",entity.getAdType());
-                ew.eq(entity.getSizesHigh()!=null,"sizes_high",entity.getSizesHigh());
-                ew.eq(entity.getSizesWide()!=null,"sizes_wide",entity.getSizesWide());
+                ew.eq(!StringUtils.isEmpty(entity.getAdSizes()),"ad_sizes",entity.getAdSizes());
                 ew.eq(!StringUtils.isEmpty(entity.getPicType()),"pic_type",entity.getPicType());
                 ew.eq(!StringUtils.isEmpty(entity.getPicUrl()),"pic_url",entity.getPicUrl());
                 ew.eq(!StringUtils.isEmpty(entity.getAdUrl()),"ad_url",entity.getAdUrl());

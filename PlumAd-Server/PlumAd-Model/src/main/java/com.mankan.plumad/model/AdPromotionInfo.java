@@ -43,17 +43,11 @@ public class AdPromotionInfo extends Model<AdPromotionInfo> {
     @TableField("ad_type")
     private String adType;
     /**
-     * 显示尺寸高
+     * 广告尺寸
      */
-    @ApiModelProperty(value = "显示尺寸高",name="sizesHigh")
-    @TableField("sizes_high")
-    private Integer sizesHigh;
-    /**
-     * 显示尺寸宽
-     */
-    @ApiModelProperty(value = "显示尺寸宽",name="sizesWide")
-    @TableField("sizes_wide")
-    private Integer sizesWide;
+    @ApiModelProperty(value = "广告尺寸",name="adSizes")
+    @TableField("ad_sizes")
+    private String adSizes;
     /**
      * 图片类型
      */
@@ -141,20 +135,12 @@ public class AdPromotionInfo extends Model<AdPromotionInfo> {
         this.adType = adType;
     }
 
-    public Integer getSizesHigh() {
-        return sizesHigh;
+    public String getAdSizes() {
+        return adSizes;
     }
 
-    public void setSizesHigh(Integer sizesHigh) {
-        this.sizesHigh = sizesHigh;
-    }
-
-    public Integer getSizesWide() {
-        return sizesWide;
-    }
-
-    public void setSizesWide(Integer sizesWide) {
-        this.sizesWide = sizesWide;
+    public void setAdSizes(String adSizes) {
+        this.adSizes = adSizes;
     }
 
     public String getPicType() {
@@ -237,21 +223,20 @@ public class AdPromotionInfo extends Model<AdPromotionInfo> {
     @Override
     public String toString() {
         return "AdPromotionInfo{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", planCode=" + planCode +
-        ", adType=" + adType +
-        ", sizesHigh=" + sizesHigh +
-        ", sizesWide=" + sizesWide +
-        ", picType=" + picType +
-        ", picUrl=" + picUrl +
-        ", adUrl=" + adUrl +
-        ", status=" + status +
-        ", remarks=" + remarks +
-        ", deleteFlag=" + deleteFlag +
-        ", createTime=" + createTime +
-        ", modifyTime=" + modifyTime +
-        ", createUser=" + createUser +
-        "}";
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", planCode='" + planCode + '\'' +
+                ", adType='" + adType + '\'' +
+                ", adSizes='" + adSizes + '\'' +
+                ", picType='" + picType + '\'' +
+                ", picUrl='" + picUrl + '\'' +
+                ", adUrl='" + adUrl + '\'' +
+                ", status='" + status + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", deleteFlag='" + deleteFlag + '\'' +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                ", createUser='" + createUser + '\'' +
+                '}';
     }
 }

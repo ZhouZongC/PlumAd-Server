@@ -32,8 +32,7 @@ public class AdPromotionPositionServiceImpl extends ServiceImpl<AdPromotionPosit
             ew.eq(!StringUtils.isEmpty(entity.getPositionName()),"position_name",entity.getPositionName());
             ew.eq(!StringUtils.isEmpty(entity.getPositionCode()),"position_code",entity.getPositionCode());
             ew.eq(!StringUtils.isEmpty(entity.getAdType()),"ad_type",entity.getAdType());
-            ew.eq(entity.getSizesWide()!=null,"sizes_wide",entity.getSizesWide());
-            ew.eq(entity.getSizesHigh()!=null,"sizes_high",entity.getSizesHigh());
+            ew.eq(!StringUtils.isEmpty(entity.getAdSizes()),"ad_sizes",entity.getAdSizes());
             ew.eq(!StringUtils.isEmpty(entity.getAdShowType()),"ad_show_type",entity.getAdShowType());
             ew.eq(!StringUtils.isEmpty(entity.getAdFilter()),"ad_filter",entity.getAdFilter());
             ew.eq(!StringUtils.isEmpty(entity.getAdPromotionUrl()),"ad_promotion_url",entity.getAdPromotionUrl());
@@ -56,8 +55,7 @@ public class AdPromotionPositionServiceImpl extends ServiceImpl<AdPromotionPosit
             ew.eq(!StringUtils.isEmpty(entity.getPositionName()),"position_name",entity.getPositionName());
             ew.eq(!StringUtils.isEmpty(entity.getPositionCode()),"position_code",entity.getPositionCode());
             ew.eq(!StringUtils.isEmpty(entity.getAdType()),"ad_type",entity.getAdType());
-            ew.eq(entity.getSizesWide()!=null,"sizes_wide",entity.getSizesWide());
-            ew.eq(entity.getSizesHigh()!=null,"sizes_high",entity.getSizesHigh());
+            ew.eq(!StringUtils.isEmpty(entity.getAdSizes()),"ad_sizes",entity.getAdSizes());
             ew.eq(!StringUtils.isEmpty(entity.getAdShowType()),"ad_show_type",entity.getAdShowType());
             ew.eq(!StringUtils.isEmpty(entity.getAdFilter()),"ad_filter",entity.getAdFilter());
             ew.eq(!StringUtils.isEmpty(entity.getAdPromotionUrl()),"ad_promotion_url",entity.getAdPromotionUrl());
@@ -82,8 +80,7 @@ public class AdPromotionPositionServiceImpl extends ServiceImpl<AdPromotionPosit
                 ew.eq(!StringUtils.isEmpty(entity.getPositionName()),"position_name",entity.getPositionName());
                 ew.eq(!StringUtils.isEmpty(entity.getPositionCode()),"position_code",entity.getPositionCode());
                 ew.eq(!StringUtils.isEmpty(entity.getAdType()),"ad_type",entity.getAdType());
-                ew.eq(entity.getSizesWide()!=null,"sizes_wide",entity.getSizesWide());
-                ew.eq(entity.getSizesHigh()!=null,"sizes_high",entity.getSizesHigh());
+                ew.eq(!StringUtils.isEmpty(entity.getAdSizes()),"ad_sizes",entity.getAdSizes());
                 ew.eq(!StringUtils.isEmpty(entity.getAdShowType()),"ad_show_type",entity.getAdShowType());
                 ew.eq(!StringUtils.isEmpty(entity.getAdFilter()),"ad_filter",entity.getAdFilter());
                 ew.eq(!StringUtils.isEmpty(entity.getAdPromotionUrl()),"ad_promotion_url",entity.getAdPromotionUrl());

@@ -62,17 +62,10 @@ public class AdPromotionPosition extends Model<AdPromotionPosition> {
     private String adType;
     /**
      * 广告尺寸
-宽
      */
-    @ApiModelProperty(value = "广告尺寸宽",name="sizesWide")
-    @TableField("sizes_wide")
-    private Integer sizesWide;
-    /**
-     * 广告尺寸高
-     */
-    @ApiModelProperty(value = "广告尺寸高",name="sizesHigh")
-    @TableField("sizes_high")
-    private Integer sizesHigh;
+    @ApiModelProperty(value = "广告尺寸",name="adSizes")
+    @TableField("ad_sizes")
+    private String adSizes;
     /**
      * 显示效果
      */
@@ -184,20 +177,12 @@ public class AdPromotionPosition extends Model<AdPromotionPosition> {
         this.adType = adType;
     }
 
-    public Integer getSizesWide() {
-        return sizesWide;
+    public String getAdSizes() {
+        return adSizes;
     }
 
-    public void setSizesWide(Integer sizesWide) {
-        this.sizesWide = sizesWide;
-    }
-
-    public Integer getSizesHigh() {
-        return sizesHigh;
-    }
-
-    public void setSizesHigh(Integer sizesHigh) {
-        this.sizesHigh = sizesHigh;
+    public void setAdSizes(String adSizes) {
+        this.adSizes = adSizes;
     }
 
     public String getAdShowType() {
@@ -280,24 +265,23 @@ public class AdPromotionPosition extends Model<AdPromotionPosition> {
     @Override
     public String toString() {
         return "AdPromotionPosition{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", promotionCode=" + promotionCode +
-        ", chargingMode=" + chargingMode +
-        ", positionName=" + positionName +
-        ", positionCode=" + positionCode +
-        ", adType=" + adType +
-        ", sizesWide=" + sizesWide +
-        ", sizesHigh=" + sizesHigh +
-        ", adShowType=" + adShowType +
-        ", adFilter=" + adFilter +
-        ", adPromotionUrl=" + adPromotionUrl +
-        ", status=" + status +
-        ", remarks=" + remarks +
-        ", deleteFlag=" + deleteFlag +
-        ", createTime=" + createTime +
-        ", modifyTime=" + modifyTime +
-        ", createUser=" + createUser +
-        "}";
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", promotionCode='" + promotionCode + '\'' +
+                ", chargingMode='" + chargingMode + '\'' +
+                ", positionName='" + positionName + '\'' +
+                ", positionCode='" + positionCode + '\'' +
+                ", adType='" + adType + '\'' +
+                ", adSizes=" + adSizes +
+                ", adShowType='" + adShowType + '\'' +
+                ", adFilter='" + adFilter + '\'' +
+                ", adPromotionUrl='" + adPromotionUrl + '\'' +
+                ", status='" + status + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", deleteFlag='" + deleteFlag + '\'' +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                ", createUser='" + createUser + '\'' +
+                '}';
     }
 }

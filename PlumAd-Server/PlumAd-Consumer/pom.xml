@@ -30,12 +30,6 @@
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <!--前后端加密-->
-        <dependency>
-            <groupId>com.github.yinjihuan</groupId>
-            <artifactId>spring-boot-starter-encrypt</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
     <!--指定使用maven打包-->

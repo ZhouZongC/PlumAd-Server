@@ -8,8 +8,7 @@
         <result column="user_id" property="userId" />
         <result column="plan_code" property="planCode" />
         <result column="ad_type" property="adType" />
-        <result column="sizes_high" property="sizesHigh" />
-        <result column="sizes_wide" property="sizesWide" />
+        <result column="ad_sizes" property="adSizes" />
         <result column="pic_type" property="picType" />
         <result column="pic_url" property="picUrl" />
         <result column="ad_url" property="adUrl" />

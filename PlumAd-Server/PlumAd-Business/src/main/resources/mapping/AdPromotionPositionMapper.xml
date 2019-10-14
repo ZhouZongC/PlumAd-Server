@@ -11,8 +11,7 @@
         <result column="position_name" property="positionName" />
         <result column="position_code" property="positionCode" />
         <result column="ad_type" property="adType" />
-        <result column="sizes_wide" property="sizesWide" />
-        <result column="sizes_high" property="sizesHigh" />
+        <result column="ad_sizes" property="adSizes" />
         <result column="ad_show_type" property="adShowType" />
         <result column="ad_filter" property="adFilter" />
         <result column="ad_promotion_url" property="adPromotionUrl" />

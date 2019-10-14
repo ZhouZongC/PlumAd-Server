@@ -1,12 +1,6 @@
 package com.mankan.plumad.controller.rest;
 
-import com.github.pagehelper.PageInfo;
-import com.mankan.plumad.dto.AdQuery;
-import com.mankan.plumad.dto.DataGrid;
 import com.mankan.plumad.handle.AdRestHandle;
-import com.mipay.base.common.constant.enums.ReturnCode;
-import com.mipay.base.util.JsonResultUtil;
-import com.mipay.base.util.StringUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
