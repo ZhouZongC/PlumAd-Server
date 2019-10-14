@@ -25,4 +25,9 @@ public class AddressCodeApiMock implements AddressCodeApi {
     public AddressCode getAddressCodeByCode(String code) {
         return null;
     }
+
+    @Override
+    public String getAddressCodeByName(String name) {
+        return null;
+    }
 }

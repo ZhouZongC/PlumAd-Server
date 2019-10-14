@@ -1,6 +1,9 @@
 package com.mankan.plumad.service;
 
 import java.util.List;
+
+import com.mankan.plumad.dto.AdPromotionQuery;
+import com.mankan.plumad.model.AdPromotionInfo;
 import com.mankan.plumad.model.AdPromotionMode;
 import com.baomidou.mybatisplus.service.IService;
 import java.util.List;
@@ -38,4 +41,6 @@ public interface IAdPromotionModeService extends IService<AdPromotionMode> {
          * @return
          */
         AdPromotionMode getAdPromotionModeByCondition(AdPromotionMode entity);
+
+    List<AdPromotionInfo> listAd(AdPromotionQuery adPromotionQuery);
 }

@@ -212,17 +212,6 @@ public class AdRestHandle {
     }
 
     /**
-     * 广告扣费
-     * @param userId
-     * @param planCode
-     * @return
-     */
-    private Boolean chargingFee(String userId, String planCode) {
-
-        return true;
-    }
-
-    /**
      * 广告短链接跳转
      * @param shorturl
      * @return
@@ -261,6 +250,20 @@ public class AdRestHandle {
             }
         }
         return "http://mk.nbmankan.com/";
+    }
+
+
+    /**
+     * 广告扣费
+     * @param userId
+     * @param planCode
+     * @return
+     */
+    private Boolean chargingFee(String userId, String planCode) {
+        //增加消费记录
+        //扣除余额
+        //判断余额，日消费 是否达标 达标下线
+        return true;
     }
 
 

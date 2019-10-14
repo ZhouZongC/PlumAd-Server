@@ -13,4 +13,10 @@
         <result column="updated_at" property="updatedAt" />
     </resultMap>
 
+    <select id="getAddressCodeByName" resultType="String">
+        select  code from  address_code
+           where name like '%${name}%' and length(code) = 6
+        limit 0,1
+    </select>
+
 </mapper>

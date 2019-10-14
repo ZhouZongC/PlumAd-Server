@@ -35,4 +35,6 @@ public class AddressCodeConsumer {
     public AddressCode getAddressCodeByCode(String code){
         return addressCodeApi.getAddressCodeByCode(code);
     }
+
+    public String getAddressCode(String name){return addressCodeApi.getAddressCodeByName(name);}
 }

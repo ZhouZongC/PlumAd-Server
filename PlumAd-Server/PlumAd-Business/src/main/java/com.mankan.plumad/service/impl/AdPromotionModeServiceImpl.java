@@ -1,5 +1,7 @@
 package com.mankan.plumad.service.impl;
 
+import com.mankan.plumad.dto.AdPromotionQuery;
+import com.mankan.plumad.model.AdPromotionInfo;
 import com.mankan.plumad.model.AdPromotionMode;
 import com.mankan.plumad.mapper.AdPromotionModeMapper;
 import com.mankan.plumad.service.IAdPromotionModeService;
@@ -137,4 +139,9 @@ public class AdPromotionModeServiceImpl extends ServiceImpl<AdPromotionModeMappe
                 ew.eq(!StringUtils.isEmpty(entity.getCreateUser()),"create_user",entity.getCreateUser());
              return this.selectOne(ew);
         }
+
+    @Override
+    public List<AdPromotionInfo> listAd(AdPromotionQuery adPromotionQuery) {
+        return this.baseMapper.listAd(adPromotionQuery);
+    }
 }

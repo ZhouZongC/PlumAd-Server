@@ -1,8 +1,12 @@
 package com.mankan.plumad.mapper;
 
+import com.mankan.plumad.dto.AdPromotionQuery;
+import com.mankan.plumad.model.AdPromotionInfo;
 import com.mankan.plumad.model.AdPromotionMode;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +18,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AdPromotionModeMapper extends BaseMapper<AdPromotionMode> {
+
+    List<AdPromotionInfo> listAd(AdPromotionQuery adPromotionQuery);
 
 }

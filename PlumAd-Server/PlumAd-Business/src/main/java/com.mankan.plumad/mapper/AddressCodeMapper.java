@@ -3,6 +3,7 @@ package com.mankan.plumad.mapper;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.mankan.plumad.model.AddressCode;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -15,4 +16,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AddressCodeMapper extends BaseMapper<AddressCode> {
 
+    String getAddressCodeByName(@Param("name") String name);
 }

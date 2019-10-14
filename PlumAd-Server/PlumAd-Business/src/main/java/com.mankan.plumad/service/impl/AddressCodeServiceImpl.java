@@ -51,5 +51,10 @@ public class AddressCodeServiceImpl extends ServiceImpl<AddressCodeMapper, Addre
         return this.selectOne(ew);
     }
 
+    @Override
+    public String getAddressCodeByName(String name) {
+        return this.baseMapper.getAddressCodeByName(name);
+    }
+
 
 }

@@ -69,7 +69,7 @@ public class AdPromotionModeProvider implements AdPromotionModeApi {
 
     @Override
     public List<AdPromotionInfo> listAd(AdPromotionQuery adPromotionQuery) {
-        return null;
+        return service.listAd(adPromotionQuery);
     }
 
 }

@@ -37,5 +37,8 @@
         <result column="modify_time" property="modifyTime" />
         <result column="create_user" property="createUser" />
     </resultMap>
+    <select id="listAd" resultType="com.mankan.plumad.model.AdPromotionInfo">
+
+    </select>
 
 </mapper>

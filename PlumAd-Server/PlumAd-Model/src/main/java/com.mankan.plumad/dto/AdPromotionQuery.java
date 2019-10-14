@@ -1,6 +1,7 @@
 package com.mankan.plumad.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author: youtiao
@@ -37,6 +38,10 @@ public class AdPromotionQuery implements Serializable {
      * 投放区域
      */
     private String promotionArea;
+    /**
+     * 剩余当日余额
+     */
+    private BigDecimal limitFee;
 
     public String getChargingMode() {
         return chargingMode;
@@ -92,6 +97,14 @@ public class AdPromotionQuery implements Serializable {
 
     public void setPromotionArea(String promotionArea) {
         this.promotionArea = promotionArea;
+    }
+
+    public BigDecimal getLimitFee() {
+        return limitFee;
+    }
+
+    public void setLimitFee(BigDecimal limitFee) {
+        this.limitFee = limitFee;
     }
 
     public AdPromotionQuery(String chargingMode, String type, String adType, String adSizes,

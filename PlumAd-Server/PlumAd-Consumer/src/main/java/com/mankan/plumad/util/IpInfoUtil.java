@@ -1,7 +1,10 @@
 package com.mankan.plumad.util;
 
+import com.mankan.plumad.consumer.AddressCodeConsumer;
 import com.mankan.plumad.dto.IpInfoDTO;
+import com.mipay.base.util.StringUtil;
 import net.ipip.ipdb.City;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -14,6 +17,9 @@ import java.util.Map;
 @Component
 public class IpInfoUtil {
 
+    @Autowired
+    private AddressCodeConsumer addressCodeConsumer;
+
     public IpInfoDTO getIpInfo(String ip)
     {
 
@@ -23,10 +29,29 @@ public class IpInfoUtil {
             City db = new City("/Users/nbfujx/tool/ipdb/ipipfree.ipdb");
             // db.findInfo(address, language) 返回 CityInfo 对象
             Map<String,String> info = db.findMap(ip, "CN");
+
             System.out.println(info);
+
             infoDTO.setRegion(info.get("region_name"));
             infoDTO.setCity(info.get("city_name"));
             infoDTO.setCountry(info.get("country_name"));
+
+            try {
+                String region = infoDTO.getRegion();
+                String city = infoDTO.getCity();
+                if (StringUtil.isNotBlank(region)) {
+                    String region_id = addressCodeConsumer.getAddressCode(region);
+                    infoDTO.setRegion_id(region_id);
+
+                }
+                if (StringUtil.isNotBlank(city)) {
+                    String city_id = addressCodeConsumer.getAddressCode(city);
+                    infoDTO.setCity_id(city_id);
+                }
+            }catch (Exception e){
+
+            }
+
             return infoDTO;
         } catch (Exception e) {
             e.printStackTrace();

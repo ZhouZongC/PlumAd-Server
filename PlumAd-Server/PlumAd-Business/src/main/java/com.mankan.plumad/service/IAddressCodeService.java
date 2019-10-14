@@ -27,4 +27,6 @@ public interface IAddressCodeService extends IService<AddressCode> {
     List<AddressCode> getAllAddress();
 
     AddressCode getAddressCodeByCode(String code);
+
+    String getAddressCodeByName(String name);
 }

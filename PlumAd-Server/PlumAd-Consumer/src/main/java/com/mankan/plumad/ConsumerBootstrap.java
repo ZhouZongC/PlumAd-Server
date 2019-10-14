@@ -1,6 +1,5 @@
 package com.mankan.plumad;
 
-import com.cxytiandi.encrypt.anno.EnableEncrypt;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -14,7 +13,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @author nbfujx
  * @date 2017/11/20
  */
-@EnableEncrypt
 @SpringBootApplication
 @ServletComponentScan
 @ComponentScan(basePackages= {"com.mipay","com.mankan"})

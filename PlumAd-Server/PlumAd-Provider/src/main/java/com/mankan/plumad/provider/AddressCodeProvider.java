@@ -81,5 +81,10 @@ public class AddressCodeProvider implements AddressCodeApi {
         return addressCodeService.getAddressCodeByCode(code);
     }
 
+    @Override
+    public String getAddressCodeByName(String name) {
+        return addressCodeService.getAddressCodeByName(name);
+    }
+
 
 }

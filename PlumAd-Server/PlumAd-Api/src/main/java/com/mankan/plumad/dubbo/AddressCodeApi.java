@@ -32,4 +32,6 @@ public interface AddressCodeApi {
     List<AddressCode> listAddress(String code, String s);
 
     AddressCode getAddressCodeByCode(String code);
+
+    String getAddressCodeByName(String name);
 }
