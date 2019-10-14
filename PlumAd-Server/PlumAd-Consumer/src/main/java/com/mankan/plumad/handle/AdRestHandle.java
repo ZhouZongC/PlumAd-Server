@@ -6,6 +6,7 @@ import com.mankan.plumad.dto.*;
 import com.mankan.plumad.model.AdPromotionInfo;
 import com.mankan.plumad.model.AdPromotionLog;
 import com.mankan.plumad.model.AdPromotionPositionAd;
+import com.mankan.plumad.model.UserConsume;
 import com.mankan.plumad.util.IpInfoUtil;
 import com.mankan.plumad.util.NetworkUtil;
 import com.mankan.plumad.util.RandomUtils;
@@ -47,6 +48,9 @@ public class AdRestHandle {
 
     @Autowired
     private AdPromotionInfoConsumer adPromotionInfoConsumer;
+
+    @Autowired
+    private UserConsumeConsumer userConsumeConsumer;
 
     @Autowired
     private IpInfoUtil ipInfoUtil;
@@ -263,6 +267,9 @@ public class AdRestHandle {
         //增加消费记录
         //扣除余额
         //判断余额，日消费 是否达标 达标下线
+        UserConsume userConsume =new UserConsume();
+
+
         return true;
     }
 
