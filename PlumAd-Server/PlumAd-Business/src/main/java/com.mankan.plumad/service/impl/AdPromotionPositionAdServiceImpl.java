@@ -27,7 +27,7 @@ public class AdPromotionPositionAdServiceImpl extends ServiceImpl<AdPromotionPos
             Wrapper<AdPromotionPositionAd> ew = new EntityWrapper<AdPromotionPositionAd>();
             ew.eq(!StringUtils.isEmpty(entity.getId()),"id",entity.getId());
             ew.eq(!StringUtils.isEmpty(entity.getUserId()),"user_id",entity.getUserId());
-            ew.eq(!StringUtils.isEmpty(entity.getPromotionPositionId()),"promotion_position_id",entity.getPromotionPositionId());
+            ew.eq(!StringUtils.isEmpty(entity.getPositionCode()),"position_code",entity.getPositionCode());
             ew.eq(!StringUtils.isEmpty(entity.getPromotionInfoId()),"promotion_info_id",entity.getPromotionInfoId());
             ew.eq(!StringUtils.isEmpty(entity.getStatus()),"status",entity.getStatus());
             ew.eq(!StringUtils.isEmpty(entity.getRemarks()),"remarks",entity.getRemarks());
@@ -43,7 +43,7 @@ public class AdPromotionPositionAdServiceImpl extends ServiceImpl<AdPromotionPos
         Wrapper<AdPromotionPositionAd> ew = new EntityWrapper<AdPromotionPositionAd>();
             ew.eq(!StringUtils.isEmpty(entity.getId()),"id",entity.getId());
             ew.eq(!StringUtils.isEmpty(entity.getUserId()),"user_id",entity.getUserId());
-            ew.eq(!StringUtils.isEmpty(entity.getPromotionPositionId()),"promotion_position_id",entity.getPromotionPositionId());
+            ew.eq(!StringUtils.isEmpty(entity.getPositionCode()),"position_code",entity.getPositionCode());
             ew.eq(!StringUtils.isEmpty(entity.getPromotionInfoId()),"promotion_info_id",entity.getPromotionInfoId());
             ew.eq(!StringUtils.isEmpty(entity.getStatus()),"status",entity.getStatus());
             ew.eq(!StringUtils.isEmpty(entity.getRemarks()),"remarks",entity.getRemarks());
@@ -61,7 +61,7 @@ public class AdPromotionPositionAdServiceImpl extends ServiceImpl<AdPromotionPos
               Wrapper<AdPromotionPositionAd> ew = new EntityWrapper<AdPromotionPositionAd>();
                 ew.eq(!StringUtils.isEmpty(entity.getId()),"id",entity.getId());
                 ew.eq(!StringUtils.isEmpty(entity.getUserId()),"user_id",entity.getUserId());
-                ew.eq(!StringUtils.isEmpty(entity.getPromotionPositionId()),"promotion_position_id",entity.getPromotionPositionId());
+            ew.eq(!StringUtils.isEmpty(entity.getPositionCode()),"position_code",entity.getPositionCode());
                 ew.eq(!StringUtils.isEmpty(entity.getPromotionInfoId()),"promotion_info_id",entity.getPromotionInfoId());
                 ew.eq(!StringUtils.isEmpty(entity.getStatus()),"status",entity.getStatus());
                 ew.eq(!StringUtils.isEmpty(entity.getRemarks()),"remarks",entity.getRemarks());

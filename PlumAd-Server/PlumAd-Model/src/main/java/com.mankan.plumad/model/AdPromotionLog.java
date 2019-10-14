@@ -31,11 +31,11 @@ public class AdPromotionLog extends Model<AdPromotionLog> {
     @TableField("user_id")
     private String userId;
     /**
-     * 广告位id
+     * 广告位编码
      */
-    @ApiModelProperty(value = "广告位id",name="promotionPositionId")
-    @TableField("promotion_position_id")
-    private String promotionPositionId;
+    @ApiModelProperty(value = "广告位编码",name="positionCode")
+    @TableField("position_code")
+    private String positionCode;
     /**
      * 推广方式
 网站/app/qq群/微信群/大V网红
@@ -138,12 +138,12 @@ public class AdPromotionLog extends Model<AdPromotionLog> {
         this.userId = userId;
     }
 
-    public String getPromotionPositionId() {
-        return promotionPositionId;
+    public String getPositionCode() {
+        return positionCode;
     }
 
-    public void setPromotionPositionId(String promotionPositionId) {
-        this.promotionPositionId = promotionPositionId;
+    public void setPositionCode(String positionCode) {
+        this.positionCode = positionCode;
     }
 
     public String getPromotionType() {
@@ -266,23 +266,23 @@ public class AdPromotionLog extends Model<AdPromotionLog> {
     @Override
     public String toString() {
         return "AdPromotionLog{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", promotionPositionId=" + promotionPositionId +
-        ", promotionType=" + promotionType +
-        ", chargingMode=" + chargingMode +
-        ", interfaceType=" + interfaceType +
-        ", ipAddress=" + ipAddress +
-        ", macAddress=" + macAddress +
-        ", dnsAddress=" + dnsAddress +
-        ", userAgent=" + userAgent +
-        ", promotionInfoId=" + promotionInfoId +
-        ", status=" + status +
-        ", remarks=" + remarks +
-        ", deleteFlag=" + deleteFlag +
-        ", createTime=" + createTime +
-        ", modifyTime=" + modifyTime +
-        ", createUser=" + createUser +
-        "}";
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", positionCode='" + positionCode + '\'' +
+                ", promotionType='" + promotionType + '\'' +
+                ", chargingMode='" + chargingMode + '\'' +
+                ", interfaceType='" + interfaceType + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", macAddress='" + macAddress + '\'' +
+                ", dnsAddress='" + dnsAddress + '\'' +
+                ", userAgent='" + userAgent + '\'' +
+                ", promotionInfoId='" + promotionInfoId + '\'' +
+                ", status='" + status + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", deleteFlag='" + deleteFlag + '\'' +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                ", createUser='" + createUser + '\'' +
+                '}';
     }
 }

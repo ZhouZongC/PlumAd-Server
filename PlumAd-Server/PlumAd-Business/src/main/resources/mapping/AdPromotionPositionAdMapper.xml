@@ -6,7 +6,7 @@
     <resultMap id="BaseResultMap" type="com.mankan.plumad.model.AdPromotionPositionAd">
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
-        <result column="promotion_position_id" property="promotionPositionId" />
+        <result column="position_code" property="positionCode" />
         <result column="promotion_info_id" property="promotionInfoId" />
         <result column="status" property="status" />
         <result column="remarks" property="remarks" />

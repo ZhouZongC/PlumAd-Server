@@ -31,11 +31,11 @@ public class AdPromotionPositionAd extends Model<AdPromotionPositionAd> {
     @TableField("user_id")
     private String userId;
     /**
-     * 广告位id
+     * 广告位编码
      */
-    @ApiModelProperty(value = "广告位id",name="promotionPositionId")
-    @TableField("promotion_position_id")
-    private String promotionPositionId;
+    @ApiModelProperty(value = "广告位编码",name="positionCode")
+    @TableField("position_code")
+    private String positionCode;
     /**
      * 广告信息
      */
@@ -95,12 +95,12 @@ public class AdPromotionPositionAd extends Model<AdPromotionPositionAd> {
         this.userId = userId;
     }
 
-    public String getPromotionPositionId() {
-        return promotionPositionId;
+    public String getPositionCode() {
+        return positionCode;
     }
 
-    public void setPromotionPositionId(String promotionPositionId) {
-        this.promotionPositionId = promotionPositionId;
+    public void setPositionCode(String positionCode) {
+        this.positionCode = positionCode;
     }
 
     public String getPromotionInfoId() {
@@ -167,16 +167,16 @@ public class AdPromotionPositionAd extends Model<AdPromotionPositionAd> {
     @Override
     public String toString() {
         return "AdPromotionPositionAd{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", promotionPositionId=" + promotionPositionId +
-        ", promotionInfoId=" + promotionInfoId +
-        ", status=" + status +
-        ", remarks=" + remarks +
-        ", deleteFlag=" + deleteFlag +
-        ", createTime=" + createTime +
-        ", modifyTime=" + modifyTime +
-        ", createUser=" + createUser +
-        "}";
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", positionCode='" + positionCode + '\'' +
+                ", promotionInfoId='" + promotionInfoId + '\'' +
+                ", status='" + status + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", deleteFlag='" + deleteFlag + '\'' +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                ", createUser='" + createUser + '\'' +
+                '}';
     }
 }
