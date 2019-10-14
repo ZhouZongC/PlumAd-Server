@@ -245,6 +245,7 @@ public class NetworkUtil {
             result = filterMacAddress(ip,cmdResult,"-");
             return result;
         }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }
@@ -263,6 +264,7 @@ public class NetworkUtil {
             result = filterMacAddress(ip, cmdResult, ":");
             return result;
         }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
 
@@ -275,7 +277,7 @@ public class NetworkUtil {
      */
     public static String getMacAddress(String ip){
         String macAddress = "";
-        macAddress = getMacInWindows(ip).trim();
+        macAddress = "";
         if(macAddress==null||"".equals(macAddress)){
             macAddress = getMacInLinux(ip).trim();
         }
