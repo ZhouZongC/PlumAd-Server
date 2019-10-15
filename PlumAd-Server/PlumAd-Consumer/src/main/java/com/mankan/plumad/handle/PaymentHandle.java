@@ -55,7 +55,7 @@ public class PaymentHandle {
 
         log.info("铁锤支付—异步通知:" + hashMap);
         DecodeResult decryptStr = com.mipay.base.util.RSAUtil.getDecode((String) hashMap.get("encrtptKey"), (String)hashMap.get("encryptData"),
-                "signData","");
+                "signData",DFConfig.PRIVATEKEY);
         log.info("铁锤支付解密参数:" + decryptStr);
         JSONObject dataJSON = JSONObject.parseObject(decryptStr.getDecodeData());
 
@@ -113,7 +113,7 @@ public class PaymentHandle {
     public String Async(HashMap hashMap) {
         log.info("铁锤支付—异步通知:" + hashMap);
         DecodeResult decryptStr = com.mipay.base.util.RSAUtil.getDecode((String) hashMap.get("encrtptKey"), (String)hashMap.get("encryptData"),
-                "signData","");
+                "signData",PayConfig.PRIVATEKEY);
         log.info("铁锤支付解密参数:" + decryptStr);
         JSONObject dataJSON = JSONObject.parseObject(decryptStr.getDecodeData());
         if(dataJSON.getString("responseCode").equals("20000")){
@@ -310,9 +310,15 @@ public class PaymentHandle {
             return null;
         }
 
-        JSONObject resultJSON = JSONObject.parseObject(result);
-        String respStr = RSAUtil.getdecode(resultJSON.getString("encrtptKey"), resultJSON.getString("encryptData"), "signData", DFConfig.PRIVATEKEY);
+        JSONObject respJSON = JSONObject.parseObject(result);
+        if (respJSON.containsKey("code") && !respJSON.getString("code").equals("20000")) {
+            return respJSON.toJSONString();
+        }
+
+        String respStr = RSAUtil.getdecode(respJSON.getString("encrtptKey"), respJSON.getString("encryptData"), "signData", DFConfig.PRIVATEKEY);
         log.info("铁锤代付解密参数:" + respStr);
+
+
 
         return respStr;
     }
