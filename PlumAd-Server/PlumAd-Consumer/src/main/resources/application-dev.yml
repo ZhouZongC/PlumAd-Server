@@ -47,3 +47,6 @@ plumad:
   fileUpload:
     path: C://file
     url: http://192.168.1.121/
+
+sys:
+  url: http://guanli.neylab.com/msys/

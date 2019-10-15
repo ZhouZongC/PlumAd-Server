@@ -2,6 +2,7 @@ package com.mankan.plumad.mapper;
 
 import com.mankan.plumad.model.UserConsume;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @author lq
  * @since 2019-10-14
  */
+@Mapper
 public interface UserConsumeMapper extends BaseMapper<UserConsume> {
 
 }
