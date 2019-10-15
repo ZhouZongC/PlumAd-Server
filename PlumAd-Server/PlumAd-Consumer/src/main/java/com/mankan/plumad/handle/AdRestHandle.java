@@ -3,15 +3,13 @@ package com.mankan.plumad.handle;
 import com.mankan.plumad.consumer.*;
 
 import com.mankan.plumad.dto.*;
-import com.mankan.plumad.model.AdPromotionInfo;
-import com.mankan.plumad.model.AdPromotionLog;
-import com.mankan.plumad.model.AdPromotionPositionAd;
-import com.mankan.plumad.model.UserConsume;
+import com.mankan.plumad.model.*;
 import com.mankan.plumad.util.IpInfoUtil;
 import com.mankan.plumad.util.NetworkUtil;
 import com.mankan.plumad.util.RandomUtils;
 import com.mipay.base.common.constant.enums.ReturnCode;
 import com.mipay.base.util.JsonResultUtil;
+import com.mipay.base.util.OrderNumUtil;
 import com.mipay.base.util.RedisCacheUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,6 +45,9 @@ public class AdRestHandle {
     private AdPromotionModeConsumer adPromotionModeConsumer;
 
     @Autowired
+    private AdPromotionPlanConsumer adPromotionPlanConsumer;
+
+    @Autowired
     private AdPromotionInfoConsumer adPromotionInfoConsumer;
 
     @Autowired
@@ -57,6 +58,9 @@ public class AdRestHandle {
 
     @Autowired
     private RedisCacheUtil redisCacheUtil;
+
+    @Autowired
+    private OrderNumUtil orderNumUtil;
 
     /**
      * 获取推荐广告列表
@@ -175,6 +179,8 @@ public class AdRestHandle {
                 String userAgent = request.getHeader("user-agent");
                 String macAddress = NetworkUtil.getMacAddress(ip);
                 String dnsAddress = NetworkUtil.getHostName(ip);
+                String ordernum = "999" + orderNumUtil.getOrderNum("GGRZ");
+                adPromotionLog.setId(ordernum);
                 adPromotionLog.setUserId(adPromotionDTO.getUserId());
                 adPromotionLog.setPositionCode(adPromotionDTO.getPositionCode());
                 adPromotionLog.setPromotionType(adPromotionDTO.getPromotionType());
@@ -264,10 +270,15 @@ public class AdRestHandle {
      * @return
      */
     private Boolean chargingFee(String userId, String planCode) {
+
+        AdPromotionPlan searchAdPromotionPlan =  new AdPromotionPlan();
+        searchAdPromotionPlan.setPlanCode(planCode);
+        AdPromotionPlan adPromotionPlan = adPromotionPlanConsumer.getAdPromotionPlanByCondition(searchAdPromotionPlan);
         //增加消费记录
         //扣除余额
         //判断余额，日消费 是否达标 达标下线
         UserConsume userConsume =new UserConsume();
+        userConsume.setUserId(userId);
 
 
         return true;
