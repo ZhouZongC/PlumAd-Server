@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
  * </p>
  *
  * @author lq
- * @since 2019-09-24
+ * @since 2019-10-15
  */
 @ApiModel(value ="用户财务表",description ="用户财务表")
 @TableName("user_finance")
@@ -59,6 +59,12 @@ public class UserFinance extends Model<UserFinance> {
     @TableField("total_withdraw_amount")
     private BigDecimal totalWithdrawAmount;
     /**
+     * 历史总消费金额
+     */
+    @ApiModelProperty(value = "历史总消费金额",name="totalConsumeAmount")
+    @TableField("total_consume_amount")
+    private BigDecimal totalConsumeAmount;
+    /**
      * 分润提现处理中金额
      */
     @ApiModelProperty(value = "分润提现处理中金额",name="handleAmount")
@@ -71,9 +77,26 @@ public class UserFinance extends Model<UserFinance> {
     @TableField("frozen_amount")
     private BigDecimal frozenAmount;
     /**
-     * 收款银行
+     * 手机号
      */
-    @ApiModelProperty(value = "收款银行",name="bankCode")
+    @ApiModelProperty(value = "手机号",name="phone")
+    private String phone;
+    /**
+     * 身份证
+     */
+    @ApiModelProperty(value = "身份证",name="idCode")
+    @TableField("id_code")
+    private String idCode;
+    /**
+     * 银行名称
+     */
+    @ApiModelProperty(value = "银行名称",name="bankName")
+    @TableField("bank_name")
+    private String bankName;
+    /**
+     * 银行编码
+     */
+    @ApiModelProperty(value = "银行编码",name="bankCode")
     @TableField("bank_code")
     private String bankCode;
     /**
@@ -87,6 +110,12 @@ public class UserFinance extends Model<UserFinance> {
      */
     @ApiModelProperty(value = "银行账号",name="cardnum")
     private String cardnum;
+    /**
+     * 联行号
+     */
+    @ApiModelProperty(value = "联行号",name="branchCode")
+    @TableField("branch_code")
+    private String branchCode;
     /**
      * 收款人名称
      */
@@ -162,6 +191,8 @@ public class UserFinance extends Model<UserFinance> {
     @ApiModelProperty(value="展信号",name="zhanxinCode")
     @TableField(exist = false)
     private String zhanxinCode;
+    //=======================================================
+
 
     public String getUsername() {
         return username;
@@ -227,9 +258,6 @@ public class UserFinance extends Model<UserFinance> {
         this.zhanxinCode = zhanxinCode;
     }
 
-    //=======================================================
-
-
     public String getId() {
         return id;
     }
@@ -278,6 +306,14 @@ public class UserFinance extends Model<UserFinance> {
         this.totalWithdrawAmount = totalWithdrawAmount;
     }
 
+    public BigDecimal getTotalConsumeAmount() {
+        return totalConsumeAmount;
+    }
+
+    public void setTotalConsumeAmount(BigDecimal totalConsumeAmount) {
+        this.totalConsumeAmount = totalConsumeAmount;
+    }
+
     public BigDecimal getHandleAmount() {
         return handleAmount;
     }
@@ -292,6 +328,30 @@ public class UserFinance extends Model<UserFinance> {
 
     public void setFrozenAmount(BigDecimal frozenAmount) {
         this.frozenAmount = frozenAmount;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getIdCode() {
+        return idCode;
+    }
+
+    public void setIdCode(String idCode) {
+        this.idCode = idCode;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
     public String getBankCode() {
@@ -316,6 +376,14 @@ public class UserFinance extends Model<UserFinance> {
 
     public void setCardnum(String cardnum) {
         this.cardnum = cardnum;
+    }
+
+    public String getBranchCode() {
+        return branchCode;
+    }
+
+    public void setBranchCode(String branchCode) {
+        this.branchCode = branchCode;
     }
 
     public String getCardName() {
@@ -396,11 +464,16 @@ public class UserFinance extends Model<UserFinance> {
         ", withdrawAmount=" + withdrawAmount +
         ", totalRechargeAmount=" + totalRechargeAmount +
         ", totalWithdrawAmount=" + totalWithdrawAmount +
+        ", totalConsumeAmount=" + totalConsumeAmount +
         ", handleAmount=" + handleAmount +
         ", frozenAmount=" + frozenAmount +
+        ", phone=" + phone +
+        ", idCode=" + idCode +
+        ", bankName=" + bankName +
         ", bankCode=" + bankCode +
         ", bankInfo=" + bankInfo +
         ", cardnum=" + cardnum +
+        ", branchCode=" + branchCode +
         ", cardName=" + cardName +
         ", version=" + version +
         ", status=" + status +
