@@ -1,10 +1,12 @@
 package com.mankan.plumad.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.mipay.base.common.constant.enums.ReturnCode;
 import com.mipay.base.common.dto.ValidationResult;
 import com.mipay.base.util.JsonResultUtil;
+import com.mipay.base.util.StringUtil;
 import com.mipay.base.util.ValidationUtil;
 import com.mankan.plumad.consumer.UserFinanceConsumer;
 import com.mankan.plumad.dto.DataGrid;
@@ -13,15 +15,24 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpHeaders;
+import com.alibaba.fastjson.TypeReference;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import com.mankan.plumad.model.UserFinance;
 import com.mankan.plumad.dto.UserFinanceQuery;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * <p>
@@ -36,8 +47,12 @@ import com.mankan.plumad.dto.UserFinanceQuery;
 @RequestMapping("/plumad/userFinance")
 public class UserFinanceController {
 
-        @Autowired
-        private UserFinanceConsumer consumer;
+    @Value("${sys.url}")
+    private String sysUrl;
+    @Autowired
+    private UserFinanceConsumer consumer;
+    @Autowired
+    private RestTemplate restTemplate;
 
         /**
          * 获取用户财务表列表
@@ -78,28 +93,66 @@ public class UserFinanceController {
         }
 
 
-        /**
-         * 更新或者新增用户财务表
-         * @param entity
-         * @return
-         */
-        @ResponseBody
-        @RequestMapping(value = "saveUserFinance",method={RequestMethod.POST})
-        @ApiOperation(value="更新或者新增用户财务表", notes="更新或者新增用户财务表")
-        public String saveUserFinance(@RequestBody UserFinance entity){
-            //验证保存参数
-            ValidationResult result = ValidationUtil.validateEntity(entity);
-            if(!result.isHasErrors()) {
-                 Boolean flag = consumer.saveUserFinance(entity);
-                 if (flag) {
-                     return JsonResultUtil.toJson(ReturnCode.SUCCESS);
-                 } else {
-                     return JsonResultUtil.toJson(ReturnCode.ERROR);
-                 }
-            }else{
-                return JsonResultUtil.toJson(ReturnCode.ERROR,result.getErrorMsg());
+    /**
+     * 更新或者新增用户财务表
+     * @param entity
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "saveUserFinance",method={RequestMethod.POST})
+    @ApiOperation(value="更新或者新增用户财务表", notes="更新或者新增用户财务表")
+    public String saveUserFinance(@RequestBody UserFinance entity){
+        //验证保存参数
+        ValidationResult result = ValidationUtil.validateEntity(entity);
+        if(!result.isHasErrors()) {
+            if(!StringUtil.isNotBlank(entity.getId())) {
+                Boolean flag = consumer.saveUserFinance(entity);
+                if(flag){
+                    Map<String, String> map = new HashMap<>();
+                    map.put("userid",entity.getUserId());
+                    map.put("username",entity.getUsername());
+                    map.put("sex",entity.getSex());
+                    map.put("email",entity.getEmail());
+                    map.put("idcard",entity.getIdcard());
+                    map.put("mobile",entity.getMobile());
+                    map.put("orgid",entity.getOrgid());
+                    if(entity.getType().equals("L")){
+                        map.put("roleId","1637a5311ab747ffacf4b5e1464b3ce6");   // 流量主
+                    }else if(entity.getType().equals("G")){
+                        map.put("roleId","1637a5311ab747ffacf4b5e1464b3ce6");   // 广告主
+                    }else {
+                        return JsonResultUtil.toJson(ReturnCode.ERROR);
+                    }
+                    map.put("zhanxinCode",entity.getZhanxinCode());
+
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setContentType(MediaType.parseMediaType("application/json; charset=UTF-8"));
+                    headers.add("Accept", MediaType.APPLICATION_JSON.toString());
+                    HttpEntity<String> formEntity = new HttpEntity(JSON.toJSONString(map), headers);
+                    String sresult = restTemplate.postForObject(sysUrl+"synch/synchUser", formEntity, String.class);
+                    HashMap resultMap = JSON.parseObject(sresult, new TypeReference<HashMap>() {
+                    });
+//                    logger.info("返回参数:" + JSON.toJSONString(resultMap));
+                    if ("20000".equals(resultMap.get("code").toString())) {
+                        return JsonResultUtil.toJson(ReturnCode.SUCCESS);
+                    } else {
+                        return JsonResultUtil.toJson(ReturnCode.ERROR, "请联系管理员处理");
+                    }
+                }else {
+                    return JsonResultUtil.toJson(ReturnCode.ERROR);
+                }
+            }else {
+                Boolean flag = consumer.saveUserFinance(entity);
+                if (flag) {
+                    return JsonResultUtil.toJson(ReturnCode.SUCCESS);
+                } else {
+                    return JsonResultUtil.toJson(ReturnCode.ERROR);
+                }
             }
+        }else{
+            return JsonResultUtil.toJson(ReturnCode.ERROR,result.getErrorMsg());
         }
+    }
 
 
         /**

@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.annotations.Version;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * <p>
  * 用户财务表
@@ -131,6 +134,93 @@ public class UserFinance extends Model<UserFinance> {
     @ApiModelProperty(value = "创建人",name="createUser")
     @TableField("create_user")
     private String createUser;
+
+    //=======================================================
+    @NotNull
+    @ApiModelProperty(value="用户名称",name="username")
+    private String username;
+    @NotNull
+    @ApiModelProperty(value="角色类型: L 流量主 G 广告主",name="type")
+    private String type;
+
+    @ApiModelProperty(value="性别",name="sex")
+    private String sex;
+    @ApiModelProperty(value="邮箱",name="email")
+    private String email;
+    @ApiModelProperty(value="身份证",name="idcard")
+    private String idcard;
+    @ApiModelProperty(value="电话",name="mobile")
+    private String mobile;
+    @ApiModelProperty(value="部门ID",name="orgid")
+    private String orgid;
+    @ApiModelProperty(value="展信号",name="zhanxinCode")
+    private String zhanxinCode;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getOrgid() {
+        return orgid;
+    }
+
+    public void setOrgid(String orgid) {
+        this.orgid = orgid;
+    }
+
+    public String getZhanxinCode() {
+        return zhanxinCode;
+    }
+
+    public void setZhanxinCode(String zhanxinCode) {
+        this.zhanxinCode = zhanxinCode;
+    }
+
+    //=======================================================
 
 
     public String getId() {
