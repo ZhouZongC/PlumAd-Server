@@ -1,5 +1,6 @@
 package com.mankan.plumad.handle;
 
+import cn.hutool.core.util.NumberUtil;
 import com.mankan.plumad.consumer.*;
 
 import com.mankan.plumad.dto.*;
@@ -15,10 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.math.BigDecimal;
+import java.util.*;
 
 import static com.mankan.plumad.util.WeekUtil.dayForWeek;
 import static com.mankan.plumad.util.WeekUtil.hourForday;
@@ -52,6 +51,9 @@ public class AdRestHandle {
 
     @Autowired
     private UserConsumeConsumer userConsumeConsumer;
+
+    @Autowired
+    private UserFinanceConsumer userFinanceConsumer;
 
     @Autowired
     private IpInfoUtil ipInfoUtil;
@@ -274,19 +276,64 @@ public class AdRestHandle {
      * @return
      */
     private Boolean chargingFee(String userId, String planCode,String ordernum) {
-
+        //查询计划
         AdPromotionPlan searchAdPromotionPlan =  new AdPromotionPlan();
         searchAdPromotionPlan.setPlanCode(planCode);
         AdPromotionPlan adPromotionPlan = adPromotionPlanConsumer.getAdPromotionPlanByCondition(searchAdPromotionPlan);
-        //增加消费记录
-        //扣除余额
+        //查询金额
+        UserFinance searchUserFinance = new UserFinance();
+        searchUserFinance.setUserId(userId);
+        UserFinance userFinance = userFinanceConsumer.getUserFinanceByCondition(searchUserFinance);
         //判断余额，日消费 是否达标 达标下线
+        BigDecimal dayLimt = (BigDecimal) redisCacheUtil.get("GGJHFY" + planCode);
+        if(dayLimt == null){
+            dayLimt = adPromotionPlan.getUnitPrice();
+        }else{
+            dayLimt  = NumberUtil.add(dayLimt,adPromotionPlan.getUnitPrice());
+        }
+        //增加消费记录
         UserConsume userConsume =new UserConsume();
         userConsume.setUserId(userId);
+        userConsume.setPromotionLogId(ordernum);
+        userConsume.setLimitAmount(NumberUtil.sub(userFinance.getRechargeAmount(),adPromotionPlan.getUnitPrice()));
+        userConsume.setDayLimitAmount(dayLimt);
+        userConsume.setTotalAmount(adPromotionPlan.getUnitPrice());
+        userConsume.setRequestTime(new Date());
+        userConsume.setStatus("S001");
+        Boolean flag = userConsumeConsumer.saveUserConsume(userConsume);
 
+        if(flag) {
+            //扣除余额
+            redisCacheUtil.set("GGJHFY" + planCode, dayLimt, getSecondsNextEarlyMorning());
+            if(NumberUtil.isGreater(dayLimt,adPromotionPlan.getLimitAmount())){
+                // 达标下线
+                AdPromotionPlan upAdPromotionPlan = new AdPromotionPlan();
+                upAdPromotionPlan.setId(adPromotionPlan.getId());
+                upAdPromotionPlan.setStatus("R001");
+                adPromotionPlanConsumer.saveAdPromotionPlan(upAdPromotionPlan);
+            }
+            //将可消费剪掉
+            flag = userFinanceConsumer.updateUserFinanceForConsume(userFinance.getUserId(),adPromotionPlan.getLimitAmount());
+            if(flag){
+                return true;
+            }
 
-        return true;
+        }
+
+        return false;
     }
+
+    public Long getSecondsNextEarlyMorning() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_YEAR, 1);
+        // 坑就在这里
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return (cal.getTimeInMillis() - System.currentTimeMillis()) / 1000;
+    }
+
 
 
     public static int random(List<Integer> weight){

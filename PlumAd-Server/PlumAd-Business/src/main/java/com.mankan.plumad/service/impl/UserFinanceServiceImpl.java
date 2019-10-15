@@ -115,4 +115,9 @@ public class UserFinanceServiceImpl extends ServiceImpl<UserFinanceMapper, UserF
     public Boolean updateUserFinanceForRecharge(String userId, BigDecimal rechargeAmount) {
         return this.baseMapper.updateUserFinanceForRecharge(userId,rechargeAmount);
     }
+
+    @Override
+    public Boolean updateUserFinanceForConsume(String userId, BigDecimal limitAmount) {
+        return this.baseMapper.updateUserFinanceForConsume(userId,limitAmount);
+    }
 }

@@ -13,13 +13,9 @@
         <result column="total_consume_amount" property="totalConsumeAmount" />
         <result column="handle_amount" property="handleAmount" />
         <result column="frozen_amount" property="frozenAmount" />
-        <result column="phone" property="phone" />
-        <result column="id_code" property="idCode" />
-        <result column="bank_name" property="bankName" />
         <result column="bank_code" property="bankCode" />
         <result column="bank_info" property="bankInfo" />
         <result column="cardnum" property="cardnum" />
-        <result column="branch_code" property="branchCode" />
         <result column="card_name" property="cardName" />
         <result column="version" property="version" />
         <result column="status" property="status" />
@@ -29,5 +25,29 @@
         <result column="modify_time" property="modifyTime" />
         <result column="create_user" property="createUser" />
     </resultMap>
+    <update id="updateUserFinanceForS001">
+      update user_finance
+           set total_withdraw_amount = total_withdraw_amount + #{totalAmount},
+           handle_balance = handle_balance - #{totalAmount},
+         where user_id = #{userId}
+    </update>
+    <update id="updateUserFinanceForE001">
+         update user_finance
+           set withdraw_amount = withdraw_amount + #{totalAmount},
+           handle_balance = handle_balance - #{totalAmount},
+         where user_id = #{userId}
+    </update>
+    <update id="updateUserFinanceForRecharge">
+         update user_finance
+           set total_recharge_amount = total_recharge_amount + #{totalAmount},
+           recharge_amount = recharge_amount + #{totalAmount},
+         where user_id = #{userId}
+    </update>
+    <update id="updateUserFinanceForConsume">
+         update user_finance
+           set total_consume_amount = total_consume_amount + #{totalAmount},
+           recharge_amount = recharge_amount - #{totalAmount},
+         where user_id = #{userId}
+    </update>
 
 </mapper>
