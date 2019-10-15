@@ -115,6 +115,8 @@ public class AdRestHandle {
             String userAgent = request.getHeader("user-agent");
             String macAddress = NetworkUtil.getMacAddress(ip);
             String dnsAddress = NetworkUtil.getHostName(ip);
+            String ordernum = "999" + orderNumUtil.getOrderNum("GGRZ");
+            adPromotionLog.setId(ordernum);
             adPromotionLog.setUserId(adPromotionDTO.getUserId());
             adPromotionLog.setPositionCode(adPromotionDTO.getPositionCode());
             adPromotionLog.setPromotionType(adPromotionDTO.getPromotionType());
@@ -130,7 +132,7 @@ public class AdRestHandle {
             Boolean flag = adPromotionLogConsumer.saveAdPromotionLog(adPromotionLog);
             if(flag && "CPM".equals(adPromotionDTO.getChargingMode())){
                 //广告主进行扣费操作
-                flag = this.chargingFee(adPromotionInfo.getUserId(),adPromotionInfo.getPlanCode());
+                flag = this.chargingFee(adPromotionInfo.getUserId(),adPromotionInfo.getPlanCode(),ordernum);
                 if(flag){
                     AdShowVO adShowVO = new AdShowVO();
                     adShowVO.setAdType(adPromotionInfo.getAdType());
@@ -196,7 +198,7 @@ public class AdRestHandle {
                 Boolean flag = adPromotionLogConsumer.saveAdPromotionLog(adPromotionLog);
                 if(flag && "CPM".equals(adPromotionDTO.getChargingMode())){
                     //广告主进行扣费操作
-                    flag = this.chargingFee(adPromotionInfo.getUserId(),adPromotionInfo.getPlanCode());
+                    flag = this.chargingFee(adPromotionInfo.getUserId(),adPromotionInfo.getPlanCode(),ordernum);
                     if(flag){
                         AdShowVO adShowVO = new AdShowVO();
                         adShowVO.setAdType(adPromotionInfo.getAdType());
@@ -236,6 +238,8 @@ public class AdRestHandle {
             String userAgent = request.getHeader("user-agent");
             String macAddress = NetworkUtil.getMacAddress(ip);
             String dnsAddress = NetworkUtil.getHostName(ip);
+            String ordernum = "999" + orderNumUtil.getOrderNum("GGRZ");
+            adPromotionLog.setId(ordernum);
             adPromotionLog.setUserId(adShowDTO.getAdPromotionDTO().getUserId());
             adPromotionLog.setPositionCode(adShowDTO.getAdPromotionDTO().getPositionCode());
             adPromotionLog.setPromotionType(adShowDTO.getAdPromotionDTO().getPromotionType());
@@ -251,7 +255,7 @@ public class AdRestHandle {
             Boolean flag = adPromotionLogConsumer.saveAdPromotionLog(adPromotionLog);
             if (flag && "CPC".equals(adShowDTO.getAdPromotionDTO().getChargingMode())) {
                 //广告主进行扣费操作
-                flag = this.chargingFee(adShowDTO.getAdPromotionInfo().getUserId(), adShowDTO.getAdPromotionInfo().getPlanCode());
+                flag = this.chargingFee(adShowDTO.getAdPromotionInfo().getUserId(), adShowDTO.getAdPromotionInfo().getPlanCode(),ordernum);
                 if (flag) {
                     return adShowDTO.getAdPromotionInfo().getAdUrl();
                 } else {
@@ -269,7 +273,7 @@ public class AdRestHandle {
      * @param planCode
      * @return
      */
-    private Boolean chargingFee(String userId, String planCode) {
+    private Boolean chargingFee(String userId, String planCode,String ordernum) {
 
         AdPromotionPlan searchAdPromotionPlan =  new AdPromotionPlan();
         searchAdPromotionPlan.setPlanCode(planCode);
