@@ -103,4 +103,8 @@ public class UserFinanceConsumer {
     public Boolean updateUserFinanceForRecharge(String userId, BigDecimal rechargeAmount) {
         return dubboApi.updateUserFinanceForRecharge(userId,rechargeAmount);
     }
+
+    public Boolean updateUserFinanceForConsume(String userId, BigDecimal limitAmount) {
+        return dubboApi.updateUserFinanceForConsume(userId,limitAmount);
+    }
 }

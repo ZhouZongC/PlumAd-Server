@@ -45,4 +45,6 @@ public interface IUserFinanceService extends IService<UserFinance> {
         Boolean updateUserFinanceForE001(String userId, BigDecimal totalAmount);
 
         Boolean updateUserFinanceForRecharge(String userId, BigDecimal rechargeAmount);
+
+        Boolean updateUserFinanceForConsume(String userId, BigDecimal limitAmount);
 }

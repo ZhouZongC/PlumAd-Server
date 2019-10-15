@@ -23,4 +23,6 @@ public interface UserFinanceMapper extends BaseMapper<UserFinance> {
     Boolean updateUserFinanceForE001(@Param("userId") String userId, @Param("totalAmount") BigDecimal totalAmount);
 
     Boolean updateUserFinanceForRecharge(@Param("userId") String userId, @Param("totalAmount") BigDecimal totalAmount);
+
+    Boolean updateUserFinanceForConsume(@Param("userId") String userId, @Param("totalAmount") BigDecimal totalAmount);
 }

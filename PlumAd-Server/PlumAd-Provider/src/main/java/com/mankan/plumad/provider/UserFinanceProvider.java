@@ -81,4 +81,9 @@ public class UserFinanceProvider implements UserFinanceApi {
         return service.updateUserFinanceForRecharge(userId,rechargeAmount);
     }
 
+    @Override
+    public Boolean updateUserFinanceForConsume(String userId, BigDecimal limitAmount) {
+        return service.updateUserFinanceForConsume(userId,limitAmount);
+    }
+
 }

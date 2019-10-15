@@ -10,6 +10,7 @@
         <result column="withdraw_amount" property="withdrawAmount" />
         <result column="total_recharge_amount" property="totalRechargeAmount" />
         <result column="total_withdraw_amount" property="totalWithdrawAmount" />
+        <result column="total_consume_amount" property="totalConsumeAmount" />
         <result column="handle_amount" property="handleAmount" />
         <result column="frozen_amount" property="frozenAmount" />
         <result column="bank_code" property="bankCode" />
@@ -40,6 +41,12 @@
          update user_finance
            set total_recharge_amount = total_recharge_amount + #{totalAmount},
            recharge_amount = recharge_amount + #{totalAmount},
+         where user_id = #{userId}
+    </update>
+    <update id="updateUserFinanceForConsume">
+         update user_finance
+           set total_consume_amount = total_consume_amount + #{totalAmount},
+           recharge_amount = recharge_amount - #{totalAmount},
          where user_id = #{userId}
     </update>
 

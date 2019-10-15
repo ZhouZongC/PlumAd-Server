@@ -62,4 +62,9 @@ public class UserFinanceApiMock implements UserFinanceApi {
         return null;
     }
 
+    @Override
+    public Boolean updateUserFinanceForConsume(String userId, BigDecimal limitAmount) {
+        return null;
+    }
+
 }
