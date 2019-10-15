@@ -160,8 +160,7 @@ public class PaymentHandle {
 
         if(flag){
             //请求上游
-            String responseJson = "";
-
+            String responseJson =  this.paymentForIsv(userRecharge);
             JSONObject json = JSONObject.parseObject(responseJson);
             if (!json.getString("code").equals("20000")) {
                 rechargeVO.setResponseMsg(json.getString("msg"));
@@ -215,8 +214,7 @@ public class PaymentHandle {
             UserFinance userFinance = userFinanceConsumer.getUserFinanceByCondition(searchUserFinance);
             if(NumberUtil.isGreater(userFinance.getWithdrawAmount(),withdrawDTO.getTotalAmount())){
                 //请求上游
-                String responseJson = "";
-
+                String responseJson = this.dfpaymentForIsv(userRecharge);
                 JSONObject json = JSONObject.parseObject(responseJson);
                 if (!json.getString("code").equals("20000")) {
                     withdrawVO.setResponseMsg(json.getString("msg"));
@@ -253,5 +251,24 @@ public class PaymentHandle {
         }
 
         return JsonResultUtil.toJson(ReturnCode.ERROR);
+    }
+
+    /**
+     * 代付请求
+     * @param userRecharge
+     * @return
+     */
+    private String dfpaymentForIsv(UserWithdraw userRecharge) {
+        return null;
+    }
+
+
+    /**
+     * 支付请求
+     * @param userRecharge
+     * @return
+     */
+    private String paymentForIsv(UserRecharge userRecharge) {
+        return null;
     }
 }
