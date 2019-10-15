@@ -4,6 +4,7 @@ package com.mankan.plumad.dubbo;
 import com.github.pagehelper.PageInfo;
 import com.mankan.plumad.model.UserFinance;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 
@@ -65,4 +66,9 @@ public interface UserFinanceApi {
      */
     Boolean deleteUserFinance(List<String> idlist);
 
+    Boolean updateUserFinanceForS001(String userId, BigDecimal totalAmount);
+
+    Boolean updateUserFinanceForE001(String userId, BigDecimal totalAmount);
+
+    Boolean updateUserFinanceForRecharge(String userId, BigDecimal rechargeAmount);
 }

@@ -9,6 +9,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 
@@ -63,6 +64,21 @@ public class UserFinanceProvider implements UserFinanceApi {
     @Override
     public Boolean deleteUserFinance(List<String> idlist){
         return service.deleteBatchIds(idlist);
+    }
+
+    @Override
+    public Boolean updateUserFinanceForS001(String userId, BigDecimal totalAmount) {
+        return service.updateUserFinanceForS001(userId,totalAmount);
+    }
+
+    @Override
+    public Boolean updateUserFinanceForE001(String userId, BigDecimal totalAmount) {
+        return service.updateUserFinanceForE001(userId,totalAmount);
+    }
+
+    @Override
+    public Boolean updateUserFinanceForRecharge(String userId, BigDecimal rechargeAmount) {
+        return service.updateUserFinanceForRecharge(userId,rechargeAmount);
     }
 
 }

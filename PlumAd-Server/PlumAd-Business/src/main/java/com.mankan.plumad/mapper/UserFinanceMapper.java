@@ -3,6 +3,9 @@ package com.mankan.plumad.mapper;
 import com.mankan.plumad.model.UserFinance;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -15,4 +18,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserFinanceMapper extends BaseMapper<UserFinance> {
 
+    Boolean updateUserFinanceForS001(@Param("userId") String userId, @Param("totalAmount") BigDecimal totalAmount);
+
+    Boolean updateUserFinanceForE001(@Param("userId") String userId, @Param("totalAmount") BigDecimal totalAmount);
+
+    Boolean updateUserFinanceForRecharge(@Param("userId") String userId, @Param("totalAmount") BigDecimal totalAmount);
 }

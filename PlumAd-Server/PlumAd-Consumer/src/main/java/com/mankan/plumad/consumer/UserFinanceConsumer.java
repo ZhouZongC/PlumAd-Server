@@ -11,6 +11,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.mankan.plumad.dto.UserFinanceQuery;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 
@@ -91,4 +92,15 @@ public class UserFinanceConsumer {
         return dubboApi.deleteUserFinance(idlist);
     }
 
+    public Boolean updateUserFinanceForS001(String userId, BigDecimal totalAmount) {
+        return dubboApi.updateUserFinanceForS001(userId,totalAmount);
+    }
+
+    public Boolean updateUserFinanceForE001(String userId, BigDecimal totalAmount) {
+        return dubboApi.updateUserFinanceForE001(userId,totalAmount);
+    }
+
+    public Boolean updateUserFinanceForRecharge(String userId, BigDecimal rechargeAmount) {
+        return dubboApi.updateUserFinanceForRecharge(userId,rechargeAmount);
+    }
 }

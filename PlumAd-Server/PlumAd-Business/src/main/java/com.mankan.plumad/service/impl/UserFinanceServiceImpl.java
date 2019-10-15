@@ -6,6 +6,8 @@ import com.mankan.plumad.service.IUserFinanceService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.toolkit.StringUtils;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 import com.baomidou.mybatisplus.mapper.Wrapper;
@@ -98,4 +100,19 @@ public class UserFinanceServiceImpl extends ServiceImpl<UserFinanceMapper, UserF
                 ew.eq(!StringUtils.isEmpty(entity.getCreateUser()),"create_user",entity.getCreateUser());
              return this.selectOne(ew);
         }
+
+    @Override
+    public Boolean updateUserFinanceForS001(String userId, BigDecimal totalAmount) {
+        return this.baseMapper.updateUserFinanceForS001(userId,totalAmount);
+    }
+
+    @Override
+    public Boolean updateUserFinanceForE001(String userId, BigDecimal totalAmount) {
+        return this.baseMapper.updateUserFinanceForE001(userId,totalAmount);
+    }
+
+    @Override
+    public Boolean updateUserFinanceForRecharge(String userId, BigDecimal rechargeAmount) {
+        return this.baseMapper.updateUserFinanceForRecharge(userId,rechargeAmount);
+    }
 }

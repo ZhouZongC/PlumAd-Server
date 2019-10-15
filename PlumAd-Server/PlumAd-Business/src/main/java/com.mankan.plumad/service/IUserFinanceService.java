@@ -1,5 +1,6 @@
 package com.mankan.plumad.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import com.mankan.plumad.model.UserFinance;
 import com.baomidou.mybatisplus.service.IService;
@@ -38,4 +39,10 @@ public interface IUserFinanceService extends IService<UserFinance> {
          * @return
          */
         UserFinance getUserFinanceByCondition(UserFinance entity);
+
+        Boolean updateUserFinanceForS001(String userId, BigDecimal totalAmount);
+
+        Boolean updateUserFinanceForE001(String userId, BigDecimal totalAmount);
+
+        Boolean updateUserFinanceForRecharge(String userId, BigDecimal rechargeAmount);
 }

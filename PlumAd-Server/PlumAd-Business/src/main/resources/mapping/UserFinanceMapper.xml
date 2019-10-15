@@ -24,5 +24,23 @@
         <result column="modify_time" property="modifyTime" />
         <result column="create_user" property="createUser" />
     </resultMap>
+    <update id="updateUserFinanceForS001">
+      update user_finance
+           set total_withdraw_amount = total_withdraw_amount + #{totalAmount},
+           handle_balance = handle_balance - #{totalAmount},
+         where user_id = #{userId}
+    </update>
+    <update id="updateUserFinanceForE001">
+         update user_finance
+           set withdraw_amount = withdraw_amount + #{totalAmount},
+           handle_balance = handle_balance - #{totalAmount},
+         where user_id = #{userId}
+    </update>
+    <update id="updateUserFinanceForRecharge">
+         update user_finance
+           set total_recharge_amount = total_recharge_amount + #{totalAmount},
+           recharge_amount = recharge_amount + #{totalAmount},
+         where user_id = #{userId}
+    </update>
 
 </mapper>

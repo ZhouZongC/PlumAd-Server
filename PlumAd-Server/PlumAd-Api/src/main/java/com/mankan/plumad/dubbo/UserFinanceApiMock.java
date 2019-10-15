@@ -3,6 +3,7 @@ package com.mankan.plumad.dubbo;
 import com.github.pagehelper.PageInfo;
 import com.mankan.plumad.model.UserFinance;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Collection;
 
@@ -43,6 +44,21 @@ public class UserFinanceApiMock implements UserFinanceApi {
 
     @Override
     public Boolean deleteUserFinance(List<String> idlist){
+        return null;
+    }
+
+    @Override
+    public Boolean updateUserFinanceForS001(String userId, BigDecimal totalAmount) {
+        return null;
+    }
+
+    @Override
+    public Boolean updateUserFinanceForE001(String userId, BigDecimal totalAmount) {
+        return null;
+    }
+
+    @Override
+    public Boolean updateUserFinanceForRecharge(String userId, BigDecimal rechargeAmount) {
         return null;
     }
 
