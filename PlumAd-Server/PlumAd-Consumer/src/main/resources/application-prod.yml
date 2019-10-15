@@ -47,3 +47,6 @@ dubbo:
     fileUpload:
       path: C://file
       url: http://testimg.nbmankan.net/
+
+  sys:
+    url: http://guanli.neylab.com/msys/

@@ -138,22 +138,29 @@ public class UserFinance extends Model<UserFinance> {
     //=======================================================
     @NotNull
     @ApiModelProperty(value="用户名称",name="username")
+    @TableField(exist = false)
     private String username;
     @NotNull
     @ApiModelProperty(value="角色类型: L 流量主 G 广告主",name="type")
+    @TableField(exist = false)
     private String type;
-
     @ApiModelProperty(value="性别",name="sex")
+    @TableField(exist = false)
     private String sex;
     @ApiModelProperty(value="邮箱",name="email")
+    @TableField(exist = false)
     private String email;
     @ApiModelProperty(value="身份证",name="idcard")
+    @TableField(exist = false)
     private String idcard;
     @ApiModelProperty(value="电话",name="mobile")
+    @TableField(exist = false)
     private String mobile;
     @ApiModelProperty(value="部门ID",name="orgid")
+    @TableField(exist = false)
     private String orgid;
     @ApiModelProperty(value="展信号",name="zhanxinCode")
+    @TableField(exist = false)
     private String zhanxinCode;
 
     public String getUsername() {

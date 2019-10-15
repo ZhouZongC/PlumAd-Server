@@ -119,7 +119,7 @@ public class UserFinanceController {
                     if(entity.getType().equals("L")){
                         map.put("roleId","1637a5311ab747ffacf4b5e1464b3ce6");   // 流量主
                     }else if(entity.getType().equals("G")){
-                        map.put("roleId","1637a5311ab747ffacf4b5e1464b3ce6");   // 广告主
+                        map.put("roleId","63bf2c60bf8a4df9841dd34ea36c983a");   // 广告主
                     }else {
                         return JsonResultUtil.toJson(ReturnCode.ERROR);
                     }
