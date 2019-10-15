@@ -25,13 +25,13 @@ import com.mankan.plumad.dto.UserConsumeQuery;
 
 /**
  * <p>
- * 用户分润提现表 前端控制器
+ * 用户消费资金表 前端控制器
  * </p>
  *
  * @author lq
  * @since 2019-10-14
  */
-@Api(tags = "用户分润提现表",description="用户分润提现表")
+@Api(tags = "用户消费资金表",description="用户消费资金表")
 @Controller
 @RequestMapping("/plumad/userConsume")
 public class UserConsumeController {
@@ -46,7 +46,7 @@ public class UserConsumeController {
          */
         @ResponseBody
         @RequestMapping(value = "listUserConsumeForPage",method={RequestMethod.POST})
-        @ApiOperation(value="用户分润提现表", notes="用户分润提现表")
+        @ApiOperation(value="用户消费资金表", notes="用户消费资金表")
         public String listUserConsumeForPage(@RequestBody UserConsumeQuery entity){
             //验证查询参数
             ValidationResult result = ValidationUtil.validateEntity(entity);
@@ -69,9 +69,9 @@ public class UserConsumeController {
          */
         @RequestMapping(value = "getUserConsume",method={RequestMethod.POST})
         @ResponseBody
-        @ApiOperation(value="用户分润提现表", notes="用户分润提现表")
+        @ApiOperation(value="用户消费资金表", notes="用户消费资金表")
         @ApiImplicitParams({
-                @ApiImplicitParam(name = "id", value = "用户分润提现表id", required = true, dataType = "String", paramType = "body")
+                @ApiImplicitParam(name = "id", value = "用户消费资金表id", required = true, dataType = "String", paramType = "body")
         })
         public String getUserConsume(@RequestBody String id){
              return JsonResultUtil.toJson(ReturnCode.SUCCESS,consumer.getUserConsume(id));
@@ -85,7 +85,7 @@ public class UserConsumeController {
          */
         @ResponseBody
         @RequestMapping(value = "saveUserConsume",method={RequestMethod.POST})
-        @ApiOperation(value="更新或者新增用户分润提现表", notes="更新或者新增用户分润提现表")
+        @ApiOperation(value="更新或者新增用户消费资金表", notes="更新或者新增用户消费资金表")
         public String saveUserConsume(@RequestBody UserConsume entity){
             //验证保存参数
             ValidationResult result = ValidationUtil.validateEntity(entity);
@@ -109,7 +109,7 @@ public class UserConsumeController {
          */
         @RequestMapping(value = "deleteUserConsume",method={RequestMethod.POST})
         @ResponseBody
-        @ApiOperation(value="批量删除用户分润提现表", notes="批量删除用户分润提现表")
+        @ApiOperation(value="批量删除用户消费资金表", notes="批量删除用户消费资金表")
         @ApiImplicitParams({
                 @ApiImplicitParam(name = "ids", value = "用户分润提现表ids", required = true, dataType = "String",paramType="body")
         })

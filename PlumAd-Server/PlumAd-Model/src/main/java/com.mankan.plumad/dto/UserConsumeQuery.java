@@ -20,7 +20,7 @@ import com.mankan.plumad.model.UserConsume;
  * @author lq
  * @since 2019-10-14
  */
-@ApiModel(value ="用户分润提现表",description ="用户分润提现表")
+@ApiModel(value ="用户消费资金表",description ="用户消费资金表")
 public class UserConsumeQuery extends UserConsume {
 
     @Min(value = 1)
