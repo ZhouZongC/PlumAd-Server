@@ -332,9 +332,9 @@ public class PaymentHandle {
         requestJSON.put("downOrderNum",userRecharge.getOrderNum());
         requestJSON.put("totalAmount",userRecharge.getRechargeAmount());
         requestJSON.put("channelCode",PayConfig.CHANNELCODE);
-        requestJSON.put("interfaceType",userRecharge.getRechargeAmount());
+        requestJSON.put("interfaceType","P001");
         requestJSON.put("uniqueUserId",userRecharge.getOrderNum());
-        requestJSON.put("payType",userRecharge.getPayType());
+        requestJSON.put("payType",userRecharge.getPayType().equals("1")?"T001":userRecharge.getPayType().equals("2")?"T002":"");
         requestJSON.put("goodsName","充值");
         requestJSON.put("ip",userRecharge.getIpAddress());
         requestJSON.put("describe",userRecharge.getRemarks());
