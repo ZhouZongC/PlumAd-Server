@@ -1,4 +1,4 @@
-package com.mankan.redirect.util;
+package com.mankan.plumad.util;
 
 
 import org.slf4j.Logger;
