@@ -285,7 +285,7 @@ public class AdRestHandle {
         searchUserFinance.setUserId(userId);
         UserFinance userFinance = userFinanceConsumer.getUserFinanceByCondition(searchUserFinance);
         //判断余额，日消费 是否达标 达标下线
-        BigDecimal dayLimt = (BigDecimal) redisCacheUtil.get("GGJHFY" + planCode);
+        BigDecimal dayLimt = (BigDecimal) redisCacheUtil.get("GGJHFY" + planCode + Calendar.DAY_OF_YEAR);
         if(dayLimt == null){
             dayLimt = adPromotionPlan.getUnitPrice();
         }else{
@@ -304,7 +304,7 @@ public class AdRestHandle {
 
         if(flag) {
             //扣除余额
-            redisCacheUtil.set("GGJHFY" + planCode, dayLimt, getSecondsNextEarlyMorning());
+            redisCacheUtil.set("GGJHFY" + planCode + Calendar.DAY_OF_YEAR, dayLimt, getSecondsNextEarlyMorning());
             if(NumberUtil.isGreater(dayLimt,adPromotionPlan.getLimitAmount())){
                 // 达标下线
                 AdPromotionPlan upAdPromotionPlan = new AdPromotionPlan();

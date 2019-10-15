@@ -37,8 +37,25 @@
         <result column="modify_time" property="modifyTime" />
         <result column="create_user" property="createUser" />
     </resultMap>
-    <select id="listAd" resultType="com.mankan.plumad.model.AdPromotionInfo">
-
+    <resultMap id="AdPromotionInfoMap" type="com.mankan.plumad.model.AdPromotionInfo">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="plan_code" property="planCode" />
+        <result column="ad_type" property="adType" />
+        <result column="ad_sizes" property="adSizes" />
+        <result column="pic_type" property="picType" />
+        <result column="pic_url" property="picUrl" />
+        <result column="ad_url" property="adUrl" />
+        <result column="weight" property="weight" />
+        <result column="status" property="status" />
+        <result column="remarks" property="remarks" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="create_user" property="createUser" />
+    </resultMap>
+    <select id="listAd" resultMap="AdPromotionInfoMap">
+         select * from ad_promotion_mode
     </select>
 
 </mapper>
