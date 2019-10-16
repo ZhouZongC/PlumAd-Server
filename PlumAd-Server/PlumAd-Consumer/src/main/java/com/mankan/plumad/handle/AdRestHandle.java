@@ -69,7 +69,7 @@ public class AdRestHandle {
      * @param positionCode
      * @return
      */
-    public String listAd(String positionCode) throws Throwable {
+    public String listAd(String positionCode){
         //查询广告位的信息
         AdPromotionDTO adPromotionDTO = adPromotionPositionConsumer.getAdPromotionDTO(positionCode);
         AdPromotionQuery adPromotionQuery = new AdPromotionQuery(adPromotionDTO.getChargingMode(),
@@ -92,7 +92,7 @@ public class AdRestHandle {
      * @param request
      * @return
      */
-    public String getAd(String positionCode, HttpServletRequest request) throws Throwable {
+    public String getAd(String positionCode, HttpServletRequest request,int cfNum) throws Throwable {
         //查询广告位的信息
         AdPromotionDTO adPromotionDTO = adPromotionPositionConsumer.getAdPromotionDTO(positionCode);
         // 1  指定过滤广告
@@ -101,12 +101,11 @@ public class AdRestHandle {
             adPromotionPositionAdQuery.setPageNum(1);
             adPromotionPositionAdQuery.setPageSize(10);
             adPromotionPositionAdQuery.setPositionCode(adPromotionDTO.getPositionCode());
-            List<AdPromotionPositionAd> adPromotionPositionAds =
-                    adPromotionPositionAdConsumer.listAdPromotionPositionAd(adPromotionPositionAdQuery)
-                    .getList();
+            List<AdPromotionPositionAd> adPromotionPositionAds =adPromotionPositionAdConsumer.listAdPromotionPositionAd(adPromotionPositionAdQuery).getList();
             //创建Random类对象
             Random random = new Random();
-            int serverindex = random.nextInt(adPromotionPositionAds.size() - 0 + 1);
+//            int serverindex = random.nextInt(adPromotionPositionAds.size() - 0 + 1);
+            int serverindex = adPromotionPositionAds.size() < 1 ? random.nextInt(adPromotionPositionAds.size() - 0 + 1) : 0;
             //获取广告
             AdPromotionPositionAd adPromotionPositionAd = adPromotionPositionAds.get(serverindex);
             AdPromotionInfo adPromotionInfo =
@@ -141,11 +140,18 @@ public class AdRestHandle {
                     adShowVO.setAdSizes(adPromotionInfo.getAdSizes());
                     adShowVO.setPicUrl(adPromotionInfo.getPicUrl());
                     String shorurl =  RandomUtils.getRandomString(20);
-                    redisCacheUtil.set(shorurl,adPromotionInfo);
                     adShowVO.setShortUrl(shorurl);
+                    AdShowDTO adShowDTO = new AdShowDTO();
+                    adShowDTO.setAdPromotionDTO(adPromotionDTO);
+                    adShowDTO.setAdPromotionInfo(adPromotionInfo);
+                    redisCacheUtil.set(shorurl,adShowDTO,24*60*60);
                     return JsonResultUtil.toJson(ReturnCode.SUCCESS, adShowVO);
                 }else{
-                    return JsonResultUtil.toJson(ReturnCode.ERROR,"系统异常，请联系客服");
+                    cfNum = cfNum + 1;
+                    if(cfNum>5){
+                        return JsonResultUtil.toJson(ReturnCode.ERROR,"系统异常，请联系客服");
+                    }
+                    return getAd(positionCode, request,cfNum);
                 }
             }
         }else{
@@ -214,7 +220,11 @@ public class AdRestHandle {
                         adShowVO.setShortUrl(shorurl);
                         return JsonResultUtil.toJson(ReturnCode.SUCCESS, adShowVO);
                     }else{
-                        return JsonResultUtil.toJson(ReturnCode.ERROR,"系统异常，请联系客服");
+                        cfNum = cfNum + 1;
+                        if(cfNum>5){
+                            return JsonResultUtil.toJson(ReturnCode.ERROR,"系统异常，请联系客服");
+                        }
+                        return getAd(positionCode, request,cfNum);
                     }
                 }
             }else {
@@ -255,13 +265,17 @@ public class AdRestHandle {
             adPromotionLog.setStatus("S");
             adPromotionLog.setCreateTime(new Date());
             Boolean flag = adPromotionLogConsumer.saveAdPromotionLog(adPromotionLog);
-            if (flag && "CPC".equals(adShowDTO.getAdPromotionDTO().getChargingMode())) {
-                //广告主进行扣费操作
-                flag = this.chargingFee(adShowDTO.getAdPromotionInfo().getUserId(), adShowDTO.getAdPromotionInfo().getPlanCode(),ordernum);
-                if (flag) {
+            if (flag) {
+                if("CPC".equals(adShowDTO.getAdPromotionDTO().getChargingMode())){
+                    //广告主进行扣费操作
+                    flag = this.chargingFee(adShowDTO.getAdPromotionInfo().getUserId(), adShowDTO.getAdPromotionInfo().getPlanCode(), ordernum);
+                    if (flag) {
+                        return adShowDTO.getAdPromotionInfo().getAdUrl();
+                    } else {
+                        return "http://mk.nbmankan.com/";
+                    }
+                }else{
                     return adShowDTO.getAdPromotionInfo().getAdUrl();
-                } else {
-                    return "http://mk.nbmankan.com/";
                 }
             }
         }
@@ -284,6 +298,14 @@ public class AdRestHandle {
         UserFinance searchUserFinance = new UserFinance();
         searchUserFinance.setUserId(userId);
         UserFinance userFinance = userFinanceConsumer.getUserFinanceByCondition(searchUserFinance);
+        if(NumberUtil.isGreater(adPromotionPlan.getUnitPrice(),userFinance.getRechargeAmount())){
+            // 达标下线
+            AdPromotionPlan upAdPromotionPlan = new AdPromotionPlan();
+            upAdPromotionPlan.setId(adPromotionPlan.getId());
+            upAdPromotionPlan.setStatus("R001");
+            adPromotionPlanConsumer.saveAdPromotionPlan(upAdPromotionPlan);
+            return false;
+        }
         //判断余额，日消费 是否达标 达标下线
         BigDecimal dayLimt = (BigDecimal) redisCacheUtil.get("GGJHFY" + planCode + Calendar.DAY_OF_YEAR);
         if(dayLimt == null){
@@ -313,7 +335,7 @@ public class AdRestHandle {
                 adPromotionPlanConsumer.saveAdPromotionPlan(upAdPromotionPlan);
             }
             //将可消费剪掉
-            flag = userFinanceConsumer.updateUserFinanceForConsume(userFinance.getUserId(),adPromotionPlan.getLimitAmount());
+            flag = userFinanceConsumer.updateUserFinanceForConsume(userFinance.getUserId(),adPromotionPlan.getUnitPrice());
             if(flag){
                 return true;
             }

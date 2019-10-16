@@ -4,7 +4,9 @@ package com.mankan.plumad.controller;
 import com.github.pagehelper.PageInfo;
 import com.mipay.base.common.constant.enums.ReturnCode;
 import com.mipay.base.common.dto.ValidationResult;
+import com.mipay.base.util.BaseCodeUtil;
 import com.mipay.base.util.JsonResultUtil;
+import com.mipay.base.util.StringUtil;
 import com.mipay.base.util.ValidationUtil;
 import com.mankan.plumad.consumer.AdPromotionModeConsumer;
 import com.mankan.plumad.dto.DataGrid;
@@ -38,6 +40,8 @@ public class AdPromotionModeController {
 
         @Autowired
         private AdPromotionModeConsumer consumer;
+        @Autowired
+        private BaseCodeUtil baseCodeUtil;
 
         /**
          * 获取流量主推广方式列表
@@ -90,6 +94,12 @@ public class AdPromotionModeController {
             //验证保存参数
             ValidationResult result = ValidationUtil.validateEntity(entity);
             if(!result.isHasErrors()) {
+                if(!StringUtil.isNotBlank(entity.getId())) {
+                    //自动生成code
+                    String code = baseCodeUtil.getCode("CM");
+                    //自动填充code
+                    entity.setPromotionCode(code);
+                }
                  Boolean flag = consumer.saveAdPromotionMode(entity);
                  if (flag) {
                      return JsonResultUtil.toJson(ReturnCode.SUCCESS);

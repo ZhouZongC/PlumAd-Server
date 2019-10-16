@@ -55,7 +55,7 @@ public class PaymentHandle {
 
         log.info("铁锤支付—异步通知:" + hashMap);
         DecodeResult decryptStr = com.mipay.base.util.RSAUtil.getDecode((String) hashMap.get("encrtptKey"), (String)hashMap.get("encryptData"),
-                "signData","");
+                "signData",DFConfig.PRIVATEKEY);
         log.info("铁锤支付解密参数:" + decryptStr);
         JSONObject dataJSON = JSONObject.parseObject(decryptStr.getDecodeData());
 
@@ -113,12 +113,14 @@ public class PaymentHandle {
     public String Async(HashMap hashMap) {
         log.info("铁锤支付—异步通知:" + hashMap);
         DecodeResult decryptStr = com.mipay.base.util.RSAUtil.getDecode((String) hashMap.get("encrtptKey"), (String)hashMap.get("encryptData"),
-                "signData","");
+                "signData",PayConfig.PRIVATEKEY);
         log.info("铁锤支付解密参数:" + decryptStr);
+        //{descData=returnCode{code=20000, msg='成功'}, decodeData='{"agentCode":"A190728001","buyerPayAmount":"0.1","downOrderNum":"99620191016610000011","flowNumber":"10051184353336163741696","merchantCode":"M190911002","orderNum":"66620191016830000010","responseCode":"20000","responseMsg":"成功","time":1571206860978,"totalAmount":"0.1"}'}
+
         JSONObject dataJSON = JSONObject.parseObject(decryptStr.getDecodeData());
         if(dataJSON.getString("responseCode").equals("20000")){
             //将状态改成 S001
-            String orderNum = dataJSON.getString("orderNum");
+            String orderNum = dataJSON.getString("downOrderNum");
             UserRecharge searchUserRecharge = new UserRecharge();
             searchUserRecharge.setOrderNum(orderNum);
             UserRecharge userRecharge1 = userRechargeConsumer.getUserRechargeByCondition(searchUserRecharge);
@@ -348,6 +350,7 @@ public class PaymentHandle {
         requestJSON.put("uniqueUserId",userRecharge.getOrderNum());
         requestJSON.put("payType",userRecharge.getPayType().equals("1")?"T001":userRecharge.getPayType().equals("2")?"T002":"");
         requestJSON.put("goodsName","充值");
+        requestJSON.put("clientType","9");
         requestJSON.put("ip",userRecharge.getIpAddress());
         requestJSON.put("describe",userRecharge.getRemarks());
         requestJSON.put("callBackUrl",PayConfig.CALLBACKURL);
@@ -365,7 +368,7 @@ public class PaymentHandle {
         encryptionMap.put("version", "3.0.0");
 
         log.info("支付请求参数 {}" ,encryptionMap);
-        String result = post.get(encryptionMap, "http://zhifu.tiechuipay.com/pay/Pay");
+        String result = post.get(encryptionMap, "http://sk.nbmankan.com/Pay/isvPay");
         log.info("支付响应参数 {}" ,encryptionMap);
 
         if (result == null){

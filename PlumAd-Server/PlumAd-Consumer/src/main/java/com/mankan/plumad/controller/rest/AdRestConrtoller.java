@@ -1,6 +1,7 @@
 package com.mankan.plumad.controller.rest;
 
 import com.mankan.plumad.handle.AdRestHandle;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  **/
 @Controller
 @RequestMapping("/ad")
+@Api(tags="广告",description="广告")
 public class AdRestConrtoller {
 
     @Autowired
@@ -48,17 +50,17 @@ public class AdRestConrtoller {
             @ApiImplicitParam(name = "positionCode", value = "位置code", required = true, dataType = "String", paramType = "query")
     })
     public String getAd(@RequestParam("positionCode") String promotionCode, HttpServletRequest request) throws Throwable {
-        return adRestHandle.getAd(promotionCode,request);
+        return adRestHandle.getAd(promotionCode,request,0);
     }
 
 
 
 
     @RequestMapping(value = "/{shorturl}")
-    @ApiOperation(value="跳转广告推广内容", notes="跳转广告推广内容")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "shorturl", value = "短链接Url", required = true, dataType = "String", paramType = "path")
-    })
+//    @ApiOperation(value="跳转广告推广内容", notes="跳转广告推广内容")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "shorturl", value = "短链接Url", required = true, dataType = "String", paramType = "path")
+//    })
     public ModelAndView translateAd(@PathVariable String shorturl, HttpServletRequest request){
         String returnUrl = adRestHandle.translateAd(shorturl,request);
         return new ModelAndView(new RedirectView(returnUrl));

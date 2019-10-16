@@ -277,7 +277,7 @@ public class NetworkUtil {
      */
     public static String getMacAddress(String ip){
         String macAddress = "";
-        macAddress = "";
+        macAddress = getMacInWindows(ip).trim();
         if(macAddress==null||"".equals(macAddress)){
             macAddress = getMacInLinux(ip).trim();
         }

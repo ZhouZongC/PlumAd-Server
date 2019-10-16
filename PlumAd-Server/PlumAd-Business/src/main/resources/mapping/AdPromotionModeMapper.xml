@@ -55,7 +55,7 @@
         <result column="create_user" property="createUser" />
     </resultMap>
     <select id="listAd" resultMap="AdPromotionInfoMap">
-         select * from ad_promotion_mode
+         select * from ad_promotion_info
     </select>
 
 </mapper>

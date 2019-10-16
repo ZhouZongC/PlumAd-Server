@@ -33,25 +33,25 @@
     <update id="updateUserFinanceForS001">
       update user_finance
            set total_withdraw_amount = total_withdraw_amount + #{totalAmount},
-           handle_balance = handle_balance - #{totalAmount},
+           handle_balance = handle_balance - #{totalAmount}
          where user_id = #{userId}
     </update>
     <update id="updateUserFinanceForE001">
          update user_finance
            set withdraw_amount = withdraw_amount + #{totalAmount},
-           handle_balance = handle_balance - #{totalAmount},
+           handle_balance = handle_balance - #{totalAmount}
          where user_id = #{userId}
     </update>
     <update id="updateUserFinanceForRecharge">
          update user_finance
            set total_recharge_amount = total_recharge_amount + #{totalAmount},
-           recharge_amount = recharge_amount + #{totalAmount},
+           recharge_amount = recharge_amount + #{totalAmount}
          where user_id = #{userId}
     </update>
     <update id="updateUserFinanceForConsume">
          update user_finance
            set total_consume_amount = total_consume_amount + #{totalAmount},
-           recharge_amount = recharge_amount - #{totalAmount},
+           recharge_amount = recharge_amount - #{totalAmount}
          where user_id = #{userId}
     </update>
 
