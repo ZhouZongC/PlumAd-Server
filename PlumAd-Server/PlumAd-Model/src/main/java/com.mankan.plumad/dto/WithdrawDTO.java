@@ -1,5 +1,6 @@
 package com.mankan.plumad.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -10,8 +11,9 @@ import java.math.BigDecimal;
  **/
 public class WithdrawDTO implements Serializable {
 
-
+    @NotNull
     String userId;
+    @NotNull
     BigDecimal totalAmount;
     String ip;
 

@@ -158,6 +158,7 @@ public class PaymentHandle {
         userRecharge.setPayType(rechargeDTO.getPayType());
         userRecharge.setRequestTime(new Date());
         userRecharge.setStatus("R001");
+        userRecharge.setRemarks(rechargeDTO.getRemarks());
         Boolean flag = userRechargeConsumer.saveUserRecharge(userRecharge);
 
         if(flag){
@@ -219,7 +220,7 @@ public class PaymentHandle {
             UserFinance userFinance = userFinanceConsumer.getUserFinanceByCondition(searchUserFinance);
             if(NumberUtil.isGreater(userFinance.getWithdrawAmount(),withdrawDTO.getTotalAmount())){
                 //请求上游
-                String responseJson = this.dfpaymentForIsv(userRecharge,searchUserFinance);
+                String responseJson = this.dfpaymentForIsv(userRecharge);
                 if(responseJson == null){
                     return JsonResultUtil.toJson(ReturnCode.ERROR,"服务异常");
                 }
@@ -266,9 +267,15 @@ public class PaymentHandle {
      * @param userWithdrawu
      * @return
      */
-    private String dfpaymentForIsv(UserWithdraw userWithdrawu,UserFinance userFinance) {
+    private String dfpaymentForIsv(UserWithdraw userWithdrawu) {
         log.info("代付请求 userRecharge:" + userWithdrawu);
-        log.info("代付请求 userFinance:" + userFinance);
+
+        UserFinance userFinance = new UserFinance();
+        userFinance.setUserId(userWithdrawu.getUserId());
+        userFinance = userFinanceConsumer.getUserFinanceByCondition(userFinance);
+        if(userFinance == null){
+            return null;
+        }
 
         JSONObject transactionLog = new JSONObject();
         transactionLog.put("tradeAmount",userWithdrawu.getTotalAmount());
@@ -310,9 +317,14 @@ public class PaymentHandle {
             return null;
         }
 
+        //{"code":99999,"msg":"系统错误"}
         JSONObject resultJSON = JSONObject.parseObject(result);
+        if(resultJSON.getString("code").equals("20000")){
+            return result;
+        }
+
         String respStr = RSAUtil.getdecode(resultJSON.getString("encrtptKey"), resultJSON.getString("encryptData"), "signData", DFConfig.PRIVATEKEY);
-        log.info("铁锤代付解密参数:" + respStr);
+        log.info("代付解密参数:" + respStr);
 
         return respStr;
     }

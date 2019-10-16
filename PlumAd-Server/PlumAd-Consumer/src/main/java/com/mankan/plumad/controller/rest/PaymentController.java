@@ -6,16 +6,17 @@ import com.mankan.plumad.dto.WithdrawDTO;
 import com.mankan.plumad.handle.PaymentHandle;
 import com.mankan.plumad.util.HttpParamUtil;
 import com.mankan.plumad.util.NetworkUtil;
+import com.mipay.base.common.constant.enums.ReturnCode;
+import com.mipay.base.common.dto.ValidationResult;
+import com.mipay.base.util.JsonResultUtil;
+import com.mipay.base.util.ValidationUtil;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import java.util.HashMap;
  * @create: 2019-10-14 16:16
  * @description:
  **/
+@RestController
 @RequestMapping("/payment")
 public class PaymentController {
 
@@ -38,20 +40,32 @@ public class PaymentController {
     @ResponseBody
     @RequestMapping(value = "/pay",method={RequestMethod.POST})
     @ApiOperation(value="获取支付链接", notes="获取支付链接")
-    public String payment(RechargeDTO rechargeDTO, HttpServletRequest request) {
-        String ip = NetworkUtil.getIpAddr(request);
-        rechargeDTO.setIp(ip);
-        return paymentHandle.payment(rechargeDTO);
+    public String payment(@RequestBody RechargeDTO rechargeDTO, HttpServletRequest request) {
+        //验证查询参数
+        ValidationResult result = ValidationUtil.validateEntity(rechargeDTO);
+        if(!result.isHasErrors()) {
+            String ip = NetworkUtil.getIpAddr(request);
+            rechargeDTO.setIp(ip);
+            return paymentHandle.payment(rechargeDTO);
+        }else{
+            return JsonResultUtil.toJson(ReturnCode.ERROR,result.getErrorMsg());
+        }
     }
 
 
     @ResponseBody
     @RequestMapping(value = "/dfPay",method={RequestMethod.POST})
     @ApiOperation(value="获取代付", notes="获取代付")
-    public String dfpayment(WithdrawDTO withdrawDTO, HttpServletRequest request) {
+    public String dfpayment(@RequestBody WithdrawDTO withdrawDTO, HttpServletRequest request) {
+        //验证查询参数
+        ValidationResult result = ValidationUtil.validateEntity(withdrawDTO);
+        if(!result.isHasErrors()) {
         String ip = NetworkUtil.getIpAddr(request);
         withdrawDTO.setIp(ip);
         return paymentHandle.dfpayment(withdrawDTO);
+        }else{
+            return JsonResultUtil.toJson(ReturnCode.ERROR,result.getErrorMsg());
+        }
     }
 
 

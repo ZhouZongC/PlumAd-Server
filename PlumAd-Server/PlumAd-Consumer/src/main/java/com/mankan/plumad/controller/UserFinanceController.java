@@ -113,8 +113,8 @@ public class UserFinanceController {
                     map.put("username",entity.getUsername());
                     map.put("sex",entity.getSex());
                     map.put("email",entity.getEmail());
-                    map.put("idcard",entity.getIdcard());
-                    map.put("mobile",entity.getMobile());
+                    map.put("idcard",entity.getIdCode());
+                    map.put("mobile",entity.getPhone());
                     map.put("orgid",entity.getOrgid());
                     if(entity.getType().equals("L")){
                         map.put("roleId","1637a5311ab747ffacf4b5e1464b3ce6");   // 流量主

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * @create: 2019-10-10 10:22
  * @description:
  **/
-@RestController
+@Controller
 @RequestMapping("/ad")
 public class AdRestConrtoller {
 
@@ -52,7 +53,7 @@ public class AdRestConrtoller {
 
 
 
-    @ResponseBody
+
     @RequestMapping(value = "/{shorturl}")
     @ApiOperation(value="跳转广告推广内容", notes="跳转广告推广内容")
     @ApiImplicitParams({

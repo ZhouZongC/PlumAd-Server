@@ -179,12 +179,6 @@ public class UserFinance extends Model<UserFinance> {
     @ApiModelProperty(value="邮箱",name="email")
     @TableField(exist = false)
     private String email;
-    @ApiModelProperty(value="身份证",name="idcard")
-    @TableField(exist = false)
-    private String idcard;
-    @ApiModelProperty(value="电话",name="mobile")
-    @TableField(exist = false)
-    private String mobile;
     @ApiModelProperty(value="部门ID",name="orgid")
     @TableField(exist = false)
     private String orgid;
@@ -224,22 +218,6 @@ public class UserFinance extends Model<UserFinance> {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getIdcard() {
-        return idcard;
-    }
-
-    public void setIdcard(String idcard) {
-        this.idcard = idcard;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
     }
 
     public String getOrgid() {

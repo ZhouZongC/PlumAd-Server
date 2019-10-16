@@ -1,5 +1,6 @@
 package com.mankan.plumad.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -10,10 +11,16 @@ import java.math.BigDecimal;
  **/
 public class RechargeDTO implements Serializable {
 
+    @NotNull
     String userId;
+    @NotNull
     BigDecimal rechargeAmount;
+    @NotNull
     String payType;
+
     String ip;
+    @NotNull
+    String remarks;
 
     public String getUserId() {
         return userId;
@@ -45,5 +52,13 @@ public class RechargeDTO implements Serializable {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }
