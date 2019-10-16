@@ -115,7 +115,13 @@ public class UserFinanceController {
                     map.put("email",entity.getEmail());
                     map.put("idcard",entity.getIdCode());
                     map.put("mobile",entity.getPhone());
-                    map.put("orgid",entity.getOrgid());
+                    if(entity.getType().equals("L")){
+                        map.put("orgid","2c97ca56f1b64721b897b4b0ec0be79a");   // 流量主
+                    }else if(entity.getType().equals("G")){
+                        map.put("orgid","ca905d743ab94c2097b23eb0be884a31");   // 广告主
+                    }else {
+                        return JsonResultUtil.toJson(ReturnCode.ERROR);
+                    }
                     if(entity.getType().equals("L")){
                         map.put("roleId","1637a5311ab747ffacf4b5e1464b3ce6");   // 流量主
                     }else if(entity.getType().equals("G")){
