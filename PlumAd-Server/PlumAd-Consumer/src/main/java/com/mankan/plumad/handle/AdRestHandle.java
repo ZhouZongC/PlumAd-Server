@@ -72,6 +72,8 @@ public class AdRestHandle {
     public String listAd(String positionCode){
         //查询广告位的信息
         AdPromotionDTO adPromotionDTO = adPromotionPositionConsumer.getAdPromotionDTO(positionCode);
+        //查询广告位对应广告，将已经添加的广告过滤掉
+
         AdPromotionQuery adPromotionQuery = new AdPromotionQuery(adPromotionDTO.getChargingMode(),
                 adPromotionDTO.getType(),adPromotionDTO.getAdType(),adPromotionDTO.getAdSizes()
                 ,null,null,null);
