@@ -46,4 +46,9 @@ public class AdPromotionInfoApiMock implements AdPromotionInfoApi {
         return null;
     }
 
+    @Override
+    public PageInfo listAdvertisingDisplay(String positionCode) {
+        return null;
+    }
+
 }

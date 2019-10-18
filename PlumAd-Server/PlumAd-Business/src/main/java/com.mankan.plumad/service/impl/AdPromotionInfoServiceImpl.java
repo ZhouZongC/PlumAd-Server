@@ -83,4 +83,9 @@ public class AdPromotionInfoServiceImpl extends ServiceImpl<AdPromotionInfoMappe
                 ew.eq(!StringUtils.isEmpty(entity.getCreateUser()),"create_user",entity.getCreateUser());
              return this.selectOne(ew);
         }
+
+        @Override
+        public List<AdPromotionInfo> listAdvertisingDisplay(String positionCode) {
+            return baseMapper.listAdvertisingDisplay(positionCode);
+        }
 }

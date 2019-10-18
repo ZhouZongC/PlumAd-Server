@@ -65,4 +65,11 @@ public class AdPromotionInfoProvider implements AdPromotionInfoApi {
         return service.deleteBatchIds(idlist);
     }
 
+    @Override
+    public PageInfo listAdvertisingDisplay(String positionCode) {
+        List<AdPromotionInfo> AdPromotionInfos = service.listAdvertisingDisplay(positionCode);
+        PageInfo<AdPromotionInfo> pageInfo = new PageInfo<AdPromotionInfo>(AdPromotionInfos);
+        return pageInfo;
+    }
+
 }

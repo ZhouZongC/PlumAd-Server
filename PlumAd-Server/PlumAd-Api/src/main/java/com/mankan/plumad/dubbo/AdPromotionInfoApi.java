@@ -3,6 +3,7 @@ package com.mankan.plumad.dubbo;
 
 import com.github.pagehelper.PageInfo;
 import com.mankan.plumad.model.AdPromotionInfo;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Collection;
@@ -64,5 +65,10 @@ public interface AdPromotionInfoApi {
      * @return
      */
     Boolean deleteAdPromotionInfo(List<String> idlist);
+
+    /**
+     * 根据广告位编码查询广告推广信息
+     */
+    PageInfo listAdvertisingDisplay(@RequestBody String positionCode);
 
 }

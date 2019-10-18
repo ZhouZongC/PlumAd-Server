@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.mankan.plumad.model.AdPromotionInfo;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.mankan.plumad.dto.AdPromotionInfoQuery;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Collection;
@@ -90,4 +91,10 @@ public class AdPromotionInfoConsumer {
         return dubboApi.deleteAdPromotionInfo(idlist);
     }
 
+    /**
+     * 根据广告位编码查询广告推广信息
+     */
+    public PageInfo listAdvertisingDisplay(@RequestBody String positionCode){
+        return dubboApi.listAdvertisingDisplay(positionCode);
+    }
 }

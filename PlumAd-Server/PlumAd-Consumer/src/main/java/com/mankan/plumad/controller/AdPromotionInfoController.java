@@ -124,7 +124,25 @@ public class AdPromotionInfoController {
             }
         }
 
-
-
+        /**
+         * 获取广告位展示广告推广信息列表
+         * @param positionCode
+         * @return
+         */
+        @RequestMapping(value = "listAdvertisingDisplay",method={RequestMethod.POST})
+        @ResponseBody
+        @ApiOperation(value="获取广告位展示广告推广信息列表", notes="获取广告位展示广告推广信息列表")
+        @ApiImplicitParams({
+                @ApiImplicitParam(name = "positionCode", value = "广告位编码", required = true, dataType = "String", paramType = "body")
+        })
+        public String listAdvertisingDisplay(@RequestBody String positionCode){
+            //验证查询参数
+            if(positionCode == null || positionCode.trim().isEmpty()){
+                return JsonResultUtil.toJson(ReturnCode.ERROR,"广告位编码不能空");
+            }
+            PageInfo AdPromotionInfos = consumer.listAdvertisingDisplay(positionCode);
+            DataGrid dataGrid = new DataGrid(AdPromotionInfos.getTotal(),AdPromotionInfos.getList(),0);
+            return JsonResultUtil.toJson(ReturnCode.SUCCESS, dataGrid);
+        }
 }
 

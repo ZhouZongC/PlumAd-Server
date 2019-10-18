@@ -21,4 +21,27 @@
         <result column="create_user" property="createUser" />
     </resultMap>
 
+    <select id="listAdvertisingDisplay" resultMap="BaseResultMap">
+        SELECT
+          ad_promotion_info.id,
+          ad_promotion_info.user_id,
+          ad_promotion_info.plan_code,
+          ad_promotion_info.ad_type,
+          ad_promotion_info.ad_sizes,
+          ad_promotion_info.pic_type,
+          ad_promotion_info.pic_url,
+          ad_promotion_info.ad_url,
+          ad_promotion_info.weight,
+          ad_promotion_info.status,
+          ad_promotion_info.remarks,
+          ad_promotion_info.delete_flag,
+          ad_promotion_info.create_time,
+          ad_promotion_info.modify_time,
+          ad_promotion_info.create_user
+        FROM ad_promotion_info ad_promotion_info JOIN ad_promotion_position_ad ad_promotion_position_ad
+        ON ad_promotion_info.id = ad_promotion_position_ad.promotion_info_id
+        WHERE
+        position_code = #{positionCode}
+    </select>
+
 </mapper>
