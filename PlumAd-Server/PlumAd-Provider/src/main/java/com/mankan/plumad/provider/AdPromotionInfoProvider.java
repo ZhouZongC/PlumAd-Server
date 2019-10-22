@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.mankan.plumad.dubbo.AdPromotionInfoApi;
 import com.mankan.plumad.model.AdPromotionInfo;
 import com.mankan.plumad.service.IAdPromotionInfoService;
+import com.mankan.plumad.vo.AdPromotionInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
@@ -67,8 +68,8 @@ public class AdPromotionInfoProvider implements AdPromotionInfoApi {
 
     @Override
     public PageInfo listAdvertisingDisplay(String positionCode) {
-        List<AdPromotionInfo> AdPromotionInfos = service.listAdvertisingDisplay(positionCode);
-        PageInfo<AdPromotionInfo> pageInfo = new PageInfo<AdPromotionInfo>(AdPromotionInfos);
+        List<AdPromotionInfoVO> AdPromotionInfos = service.listAdvertisingDisplay(positionCode);
+        PageInfo<AdPromotionInfoVO> pageInfo = new PageInfo<AdPromotionInfoVO>(AdPromotionInfos);
         return pageInfo;
     }
 

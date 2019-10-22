@@ -3,6 +3,7 @@ package com.mankan.plumad.service;
 import java.util.List;
 import com.mankan.plumad.model.AdPromotionInfo;
 import com.baomidou.mybatisplus.service.IService;
+import com.mankan.plumad.vo.AdPromotionInfoVO;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -44,5 +45,5 @@ public interface IAdPromotionInfoService extends IService<AdPromotionInfo> {
         /**
          * 根据广告位编码查询广告推广信息
          */
-        List<AdPromotionInfo> listAdvertisingDisplay(@RequestBody String positionCode);
+        List<AdPromotionInfoVO> listAdvertisingDisplay(@RequestBody String positionCode);
 }

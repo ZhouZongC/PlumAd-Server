@@ -4,6 +4,7 @@ import com.mankan.plumad.model.AdPromotionInfo;
 import com.mankan.plumad.mapper.AdPromotionInfoMapper;
 import com.mankan.plumad.service.IAdPromotionInfoService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.mankan.plumad.vo.AdPromotionInfoVO;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.toolkit.StringUtils;
 import java.util.List;
@@ -85,7 +86,7 @@ public class AdPromotionInfoServiceImpl extends ServiceImpl<AdPromotionInfoMappe
         }
 
         @Override
-        public List<AdPromotionInfo> listAdvertisingDisplay(String positionCode) {
+        public List<AdPromotionInfoVO> listAdvertisingDisplay(String positionCode) {
             return baseMapper.listAdvertisingDisplay(positionCode);
         }
 }

@@ -2,6 +2,7 @@ package com.mankan.plumad.mapper;
 
 import com.mankan.plumad.model.AdPromotionInfo;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.mankan.plumad.vo.AdPromotionInfoVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,5 +21,5 @@ public interface AdPromotionInfoMapper extends BaseMapper<AdPromotionInfo> {
     /**
      * 根据广告位编码查询广告推广信息
      */
-    List<AdPromotionInfo> listAdvertisingDisplay(String positionCode);
+    List<AdPromotionInfoVO> listAdvertisingDisplay(String positionCode);
 }

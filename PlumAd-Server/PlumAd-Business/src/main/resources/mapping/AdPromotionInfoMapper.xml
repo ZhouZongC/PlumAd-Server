@@ -21,27 +21,28 @@
         <result column="create_user" property="createUser" />
     </resultMap>
 
-    <select id="listAdvertisingDisplay" resultMap="BaseResultMap">
+    <select id="listAdvertisingDisplay" resultType="com.mankan.plumad.vo.AdPromotionInfoVO">
         SELECT
           ad_promotion_info.id,
-          ad_promotion_info.user_id,
-          ad_promotion_info.plan_code,
-          ad_promotion_info.ad_type,
-          ad_promotion_info.ad_sizes,
-          ad_promotion_info.pic_type,
-          ad_promotion_info.pic_url,
-          ad_promotion_info.ad_url,
-          ad_promotion_info.weight,
-          ad_promotion_info.status,
-          ad_promotion_info.remarks,
-          ad_promotion_info.delete_flag,
-          ad_promotion_info.create_time,
-          ad_promotion_info.modify_time,
-          ad_promotion_info.create_user
+          ad_promotion_info.user_id AS userId,
+          ad_promotion_info.plan_code AS planCode,
+          ad_promotion_info.ad_type AS adType,
+          ad_promotion_info.ad_sizes AS adSizes,
+          ad_promotion_info.pic_type AS picType,
+          ad_promotion_info.pic_url AS picUrl,
+          ad_promotion_info.ad_url AS adUrl,
+          ad_promotion_info.weight AS weight,
+          ad_promotion_info.status AS status,
+          ad_promotion_info.remarks AS remarks,
+          ad_promotion_info.create_time AS createTime,
+          ad_promotion_info.modify_time AS modifyTime,
+          ad_promotion_info.create_user AS createUser,
+          ad_promotion_position_ad.id AS adPromotionPositionAdId,
+          ad_promotion_position_ad.status AS adPromotionPositionAdStatus
         FROM ad_promotion_info ad_promotion_info JOIN ad_promotion_position_ad ad_promotion_position_ad
         ON ad_promotion_info.id = ad_promotion_position_ad.promotion_info_id
         WHERE
-        position_code = #{positionCode}
+        ad_promotion_position_ad.position_code = #{positionCode} AND ad_promotion_position_ad.delete_flag = "1"
     </select>
 
 </mapper>
