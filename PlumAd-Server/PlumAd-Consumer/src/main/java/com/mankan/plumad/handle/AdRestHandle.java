@@ -95,99 +95,27 @@ public class AdRestHandle {
      * @return
      */
     public String getAd(String positionCode, HttpServletRequest request,int cfNum) throws Throwable {
-        //查询广告位的信息
-        AdPromotionDTO adPromotionDTO = adPromotionPositionConsumer.getAdPromotionDTO(positionCode);
-        // 1  指定过滤广告
-        if("1".equals(adPromotionDTO.getAdFilter())) {
-            AdPromotionPositionAdQuery adPromotionPositionAdQuery = new AdPromotionPositionAdQuery();
-            adPromotionPositionAdQuery.setPageNum(1);
-            adPromotionPositionAdQuery.setPageSize(10);
-            adPromotionPositionAdQuery.setPositionCode(adPromotionDTO.getPositionCode());
-            List<AdPromotionPositionAd> adPromotionPositionAds =adPromotionPositionAdConsumer.listAdPromotionPositionAd(adPromotionPositionAdQuery).getList();
-            //创建Random类对象
-            Random random = new Random();
+        try {
+            //查询广告位的信息
+            AdPromotionDTO adPromotionDTO = adPromotionPositionConsumer.getAdPromotionDTO(positionCode);
+            // 1  指定过滤广告
+            if ("1".equals(adPromotionDTO.getAdFilter())) {
+                AdPromotionPositionAdQuery adPromotionPositionAdQuery = new AdPromotionPositionAdQuery();
+                adPromotionPositionAdQuery.setPageNum(1);
+                adPromotionPositionAdQuery.setPageSize(10);
+                adPromotionPositionAdQuery.setPositionCode(adPromotionDTO.getPositionCode());
+                List<AdPromotionPositionAd> adPromotionPositionAds = adPromotionPositionAdConsumer.listAdPromotionPositionAd(adPromotionPositionAdQuery).getList();
+                //创建Random类对象
+                Random random = new Random();
 //            int serverindex = random.nextInt(adPromotionPositionAds.size() - 0 + 1);
-            int serverindex = adPromotionPositionAds.size() < 1 ? random.nextInt(adPromotionPositionAds.size() - 0 + 1) : 0;
-            //获取广告
-            AdPromotionPositionAd adPromotionPositionAd = adPromotionPositionAds.get(serverindex);
-            AdPromotionInfo adPromotionInfo =
-                    adPromotionInfoConsumer.getAdPromotionInfo(adPromotionPositionAd.getPromotionInfoId());
-            //将请求日志写入数据库
-            AdPromotionLog adPromotionLog = new AdPromotionLog();
-            String ip = NetworkUtil.getIpAddr(request);
-            String userAgent = request.getHeader("user-agent");
-            String macAddress = NetworkUtil.getMacAddress(ip);
-            String dnsAddress = NetworkUtil.getHostName(ip);
-            String ordernum = "999" + orderNumUtil.getOrderNum("GGRZ");
-            adPromotionLog.setId(ordernum);
-            adPromotionLog.setUserId(adPromotionDTO.getUserId());
-            adPromotionLog.setPositionCode(adPromotionDTO.getPositionCode());
-            adPromotionLog.setPromotionType(adPromotionDTO.getPromotionType());
-            adPromotionLog.setChargingMode(adPromotionDTO.getChargingMode());
-            adPromotionLog.setInterfaceType("1");
-            adPromotionLog.setIpAddress(ip);
-            adPromotionLog.setMacAddress(macAddress);
-            adPromotionLog.setDnsAddress(dnsAddress);
-            adPromotionLog.setUserAgent(userAgent);
-            adPromotionLog.setPromotionInfoId(adPromotionInfo.getId());
-            adPromotionLog.setStatus("S");
-            adPromotionLog.setCreateTime(new Date());
-            Boolean flag = adPromotionLogConsumer.saveAdPromotionLog(adPromotionLog);
-            if(flag && "CPM".equals(adPromotionDTO.getChargingMode())){
-                //广告主进行扣费操作
-                flag = this.chargingFee(adPromotionInfo.getUserId(),adPromotionInfo.getPlanCode(),ordernum);
-                if(flag){
-                    AdShowVO adShowVO = new AdShowVO();
-                    adShowVO.setAdType(adPromotionInfo.getAdType());
-                    adShowVO.setAdSizes(adPromotionInfo.getAdSizes());
-                    adShowVO.setPicUrl(adPromotionInfo.getPicUrl());
-                    String shorurl =  RandomUtils.getRandomString(20);
-                    adShowVO.setShortUrl(shorurl);
-                    AdShowDTO adShowDTO = new AdShowDTO();
-                    adShowDTO.setAdPromotionDTO(adPromotionDTO);
-                    adShowDTO.setAdPromotionInfo(adPromotionInfo);
-                    redisCacheUtil.set(shorurl,adShowDTO,24*60*60);
-                    return JsonResultUtil.toJson(ReturnCode.SUCCESS, adShowVO);
-                }else{
-                    cfNum = cfNum + 1;
-                    if(cfNum>5){
-                        return JsonResultUtil.toJson(ReturnCode.ERROR,"系统异常，请联系客服");
-                    }
-                    return getAd(positionCode, request,cfNum);
-                }
-            }
-        }else{
-            //获取是星期几
-            String weekDay = dayForWeek(new Date());
-            //获取现在是几点
-            int hour = hourForday(new Date());
-            //获取访问者ip地址所在区域
-            String ip = NetworkUtil.getIpAddr(request);
-            IpInfoDTO ipInfoDTO = ipInfoUtil.getIpInfo(ip);
-            //封装查询类
-            AdPromotionQuery adPromotionQuery = new AdPromotionQuery(adPromotionDTO.getChargingMode(),
-                    adPromotionDTO.getType(),adPromotionDTO.getAdType(),adPromotionDTO.getAdSizes()
-                    ,weekDay,hour,ipInfoDTO.getCity());
-
-            List<AdPromotionInfo> adPromotionInfos =  adPromotionModeConsumer.listAd(adPromotionQuery,1,10);
-            AdPromotionInfo adPromotionInfo = null;
-            if(adPromotionInfos.size() == 0) {
-                adPromotionQuery = new AdPromotionQuery(adPromotionDTO.getChargingMode(),
-                        null,adPromotionDTO.getAdType(),adPromotionDTO.getAdSizes()
-                        ,null,null,null);
-                adPromotionInfos =  adPromotionModeConsumer.listAd(adPromotionQuery,1,10);
-            }
-            if(adPromotionInfos.size() > 0) {
-                //判断权重
-                List<Integer> weight = new ArrayList<>();
-                for (AdPromotionInfo weightPollingDTO : adPromotionInfos) {
-                    weight.add(weightPollingDTO.getWeight());
-                }
-                int serverindex = random(weight);
-                //更具权重拉取最合适的广告
-                adPromotionInfo = adPromotionInfos.get(serverindex);
+                int serverindex = adPromotionPositionAds.size() < 1 ? random.nextInt(adPromotionPositionAds.size() - 0 + 1) : 0;
+                //获取广告
+                AdPromotionPositionAd adPromotionPositionAd = adPromotionPositionAds.get(serverindex);
+                AdPromotionInfo adPromotionInfo =
+                        adPromotionInfoConsumer.getAdPromotionInfo(adPromotionPositionAd.getPromotionInfoId());
                 //将请求日志写入数据库
                 AdPromotionLog adPromotionLog = new AdPromotionLog();
+                String ip = NetworkUtil.getIpAddr(request);
                 String userAgent = request.getHeader("user-agent");
                 String macAddress = NetworkUtil.getMacAddress(ip);
                 String dnsAddress = NetworkUtil.getHostName(ip);
@@ -206,35 +134,113 @@ public class AdRestHandle {
                 adPromotionLog.setStatus("S");
                 adPromotionLog.setCreateTime(new Date());
                 Boolean flag = adPromotionLogConsumer.saveAdPromotionLog(adPromotionLog);
-                if(flag && "CPM".equals(adPromotionDTO.getChargingMode())){
+                if (flag && "CPM".equals(adPromotionDTO.getChargingMode())) {
                     //广告主进行扣费操作
-                    flag = this.chargingFee(adPromotionInfo.getUserId(),adPromotionInfo.getPlanCode(),ordernum);
-                    if(flag){
+                    flag = this.chargingFee(adPromotionInfo.getUserId(), adPromotionInfo.getPlanCode(), ordernum);
+                    if (flag) {
                         AdShowVO adShowVO = new AdShowVO();
                         adShowVO.setAdType(adPromotionInfo.getAdType());
                         adShowVO.setAdSizes(adPromotionInfo.getAdSizes());
                         adShowVO.setPicUrl(adPromotionInfo.getPicUrl());
-                        String shorurl =  RandomUtils.getRandomString(20);
+                        String shorurl = RandomUtils.getRandomString(20);
+                        adShowVO.setShortUrl(shorurl);
                         AdShowDTO adShowDTO = new AdShowDTO();
                         adShowDTO.setAdPromotionDTO(adPromotionDTO);
                         adShowDTO.setAdPromotionInfo(adPromotionInfo);
-                        redisCacheUtil.set(shorurl,adShowDTO,24*60*60);
-                        adShowVO.setShortUrl(shorurl);
+                        redisCacheUtil.set(shorurl, adShowDTO, 24 * 60 * 60);
                         return JsonResultUtil.toJson(ReturnCode.SUCCESS, adShowVO);
-                    }else{
+                    } else {
                         cfNum = cfNum + 1;
-                        if(cfNum>5){
-                            return JsonResultUtil.toJson(ReturnCode.ERROR,"系统异常，请联系客服");
+                        if (cfNum > 5) {
+                            return JsonResultUtil.toJson(ReturnCode.ERROR, "系统异常，请联系客服");
                         }
-                        return getAd(positionCode, request,cfNum);
+                        return getAd(positionCode, request, cfNum);
                     }
                 }
-            }else {
-                return JsonResultUtil.toJson(ReturnCode.ERROR,"无匹配广告");
-            }
-        }
+            } else {
+                //获取是星期几
+                String weekDay = dayForWeek(new Date());
+                //获取现在是几点
+                int hour = hourForday(new Date());
+                //获取访问者ip地址所在区域
+                String ip = NetworkUtil.getIpAddr(request);
+                IpInfoDTO ipInfoDTO = ipInfoUtil.getIpInfo(ip);
+                //封装查询类
+                AdPromotionQuery adPromotionQuery = new AdPromotionQuery(adPromotionDTO.getChargingMode(),
+                        adPromotionDTO.getType(), adPromotionDTO.getAdType(), adPromotionDTO.getAdSizes()
+                        , weekDay, hour, ipInfoDTO.getCity());
 
-        return JsonResultUtil.toJson(ReturnCode.ERROR,"系统异常，请联系客服");
+                List<AdPromotionInfo> adPromotionInfos = adPromotionModeConsumer.listAd(adPromotionQuery, 1, 10);
+                AdPromotionInfo adPromotionInfo = null;
+                if (adPromotionInfos.size() == 0) {
+                    adPromotionQuery = new AdPromotionQuery(adPromotionDTO.getChargingMode(),
+                            null, adPromotionDTO.getAdType(), adPromotionDTO.getAdSizes()
+                            , null, null, null);
+                    adPromotionInfos = adPromotionModeConsumer.listAd(adPromotionQuery, 1, 10);
+                }
+                if (adPromotionInfos.size() > 0) {
+                    //判断权重
+                    List<Integer> weight = new ArrayList<>();
+                    for (AdPromotionInfo weightPollingDTO : adPromotionInfos) {
+                        weight.add(weightPollingDTO.getWeight());
+                    }
+                    int serverindex = random(weight);
+                    //更具权重拉取最合适的广告
+                    adPromotionInfo = adPromotionInfos.get(serverindex);
+                    //将请求日志写入数据库
+                    AdPromotionLog adPromotionLog = new AdPromotionLog();
+                    String userAgent = request.getHeader("user-agent");
+                    String macAddress = NetworkUtil.getMacAddress(ip);
+                    String dnsAddress = NetworkUtil.getHostName(ip);
+                    String ordernum = "999" + orderNumUtil.getOrderNum("GGRZ");
+                    adPromotionLog.setId(ordernum);
+                    adPromotionLog.setUserId(adPromotionDTO.getUserId());
+                    adPromotionLog.setPositionCode(adPromotionDTO.getPositionCode());
+                    adPromotionLog.setPromotionType(adPromotionDTO.getPromotionType());
+                    adPromotionLog.setChargingMode(adPromotionDTO.getChargingMode());
+                    adPromotionLog.setInterfaceType("1");
+                    adPromotionLog.setIpAddress(ip);
+                    adPromotionLog.setMacAddress(macAddress);
+                    adPromotionLog.setDnsAddress(dnsAddress);
+                    adPromotionLog.setUserAgent(userAgent);
+                    adPromotionLog.setPromotionInfoId(adPromotionInfo.getId());
+                    adPromotionLog.setStatus("S");
+                    adPromotionLog.setCreateTime(new Date());
+                    Boolean flag = adPromotionLogConsumer.saveAdPromotionLog(adPromotionLog);
+                    if (flag && "CPM".equals(adPromotionDTO.getChargingMode())) {
+                        //广告主进行扣费操作
+                        flag = this.chargingFee(adPromotionInfo.getUserId(), adPromotionInfo.getPlanCode(), ordernum);
+                        if (flag) {
+                            AdShowVO adShowVO = new AdShowVO();
+                            adShowVO.setAdType(adPromotionInfo.getAdType());
+                            adShowVO.setAdSizes(adPromotionInfo.getAdSizes());
+                            adShowVO.setPicUrl(adPromotionInfo.getPicUrl());
+                            String shorurl = RandomUtils.getRandomString(20);
+                            AdShowDTO adShowDTO = new AdShowDTO();
+                            adShowDTO.setAdPromotionDTO(adPromotionDTO);
+                            adShowDTO.setAdPromotionInfo(adPromotionInfo);
+                            redisCacheUtil.set(shorurl, adShowDTO, 24 * 60 * 60);
+                            adShowVO.setShortUrl(shorurl);
+                            return JsonResultUtil.toJson(ReturnCode.SUCCESS, adShowVO);
+                        } else {
+                            cfNum = cfNum + 1;
+                            if (cfNum > 5) {
+                                return JsonResultUtil.toJson(ReturnCode.ERROR, "系统异常，请联系客服");
+                            }
+                            return getAd(positionCode, request, cfNum);
+                        }
+                    }
+                } else {
+                    return JsonResultUtil.toJson(ReturnCode.ERROR, "无匹配广告");
+                }
+            }
+
+            return JsonResultUtil.toJson(ReturnCode.ERROR, "系统异常，请联系客服");
+
+        }catch (Exception e){
+
+            return JsonResultUtil.toJson(ReturnCode.ERROR, "系统异常，请联系客服");
+        }
     }
 
     /**
