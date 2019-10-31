@@ -45,7 +45,7 @@ dubbo:
 
 plumad:
   fileUpload:
-    path: C://file
+    path: C://file/
     url: http://192.168.1.121/
 
 sys:
