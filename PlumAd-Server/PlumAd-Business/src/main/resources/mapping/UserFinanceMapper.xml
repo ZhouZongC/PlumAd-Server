@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.mankan.plumad.model.UserFinance">
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
+        <result column="type" property="type" />
         <result column="recharge_amount" property="rechargeAmount" />
         <result column="withdraw_amount" property="withdrawAmount" />
         <result column="total_recharge_amount" property="totalRechargeAmount" />

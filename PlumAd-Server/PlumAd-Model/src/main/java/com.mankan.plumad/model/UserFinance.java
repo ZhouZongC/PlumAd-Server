@@ -171,7 +171,7 @@ public class UserFinance extends Model<UserFinance> {
     private String username;
     @NotNull
     @ApiModelProperty(value="角色类型: L 流量主 G 广告主",name="type")
-    @TableField(exist = false)
+    @TableField("type")
     private String type;
     @ApiModelProperty(value="性别",name="sex")
     @TableField(exist = false)
