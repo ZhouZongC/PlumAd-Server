@@ -27,7 +27,7 @@
         <springfox.version>2.7.0</springfox.version>
         <poi.version>3.15</poi.version>
         <admin.version>1.5.0</admin.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.5.0</shiro.version>
         <easypoi.version>3.1.0</easypoi.version>
         <hutool.version>4.0.12</hutool.version>
         <mybatisplus-spring-boot-starter.version>1.0.5</mybatisplus-spring-boot-starter.version>
